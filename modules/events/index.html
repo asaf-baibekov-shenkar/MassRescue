@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,83 @@
     <title>Mass Rescue - Events</title>
 </head>
 <body>
-    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch static backdrop modal</button>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Create Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="text-center">
+                        <h3 class="mb-5">Create Event</h3>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="w-100">
+                                    <iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Tel%20Aviv%20azrieli+(Mass%20Rescue)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                                        <a href="https://www.gps.ie/marine-gps/">ship tracker</a>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row mb-4">
+                                                <div class="form-outline">
+                                                    <input type="text" id="form3Example1" class="form-control"
+                                                        placeholder="Event name" />
+                                                    <label class="form-label" for="form3Example1"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <input type="text" id="form3Example3" class="form-control"
+                                                    placeholder="Subject" />
+                                                <label class="form-label" for="form3Example3"></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="inlineRadio1"
+                                                    value="earth" name="Type" />
+                                                <label class="form-check-label" for="inlineRadio1">earthQuake</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="inlineRadio2"
+                                                    value="fire" name="Type" />
+                                                <label class="form-check-label" for="inlineRadio2">fire</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" d="inlineRadio3"
+                                                    value="other" name="Type" />
+                                                <label class="form-check-label" for="inlineRadio3">other</label>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <textarea class="form-control" id="form4Example3" rows="4"
+                                                    placeholder="Message to forces"></textarea>
+                                                <label class="form-label" for="form4Example3"></label>
+                                            </div>
+
+                                            <div class="text-center text-md-start">
+                                                <input type="submit" class="btn btn-primary mb-5 mb-md-0">
+                                                </button>
+                                                <input type="reset" class="btn btn-primary mb-5 mb-md-0">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
