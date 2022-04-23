@@ -12,25 +12,25 @@
     padding-top: 0.2rem;
 }
 
-.filter .btn.active svg,
-.filter .btn:hover svg,
+#filter .btn.active svg,
+#filter .btn:hover svg,
 #list .btn svg {
     fill: white;
 }
 
-.filter #btn_create.active,
-.filter #btn_create:hover {
+#filter #btn_create.active,
+#filter #btn_create:hover {
     background-color: var(--button-active-create-bg-color);
 }
 
-.filter #btn_edit.active,
-.filter #btn_edit:hover,
+#filter #btn_edit.active,
+#filter #btn_edit:hover,
 #list .btn_edit {
     background-color: var(--button-active-edit-bg-color);
 }
 
-.filter #btn_close.active,
-.filter #btn_close:hover,
+#filter #btn_close.active,
+#filter #btn_close:hover,
 #list .btn_close {
     background-color: var(--button-active-close-bg-color);
 }
