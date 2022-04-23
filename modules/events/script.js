@@ -6,24 +6,25 @@ $(function() {
 				format: 'DD/MM/YYYY'
 			}
 		});
-});
 
-function editButtons() {
-	let edit = document.getElementsByClassName('editButton');
-	let remove = document.getElementsByClassName('removeButton');
-	if (remove[0].hasAttribute("hidden"))
-		for (let i = 0; i < edit.length; i++)
-			if (edit[i].hasAttribute("hidden")) edit[i].removeAttribute("hidden");
-			else edit[i].setAttribute("hidden", "hidden");
-}
-function removeButtons() {
-	let edit = document.getElementsByClassName('editButton');
-	let remove = document.getElementsByClassName('removeButton');
-	if (edit[0].hasAttribute("hidden"))
-		for (let i = 0; i < remove.length; i++)
-			if (remove[i].hasAttribute("hidden")) remove[i].removeAttribute("hidden");
-			else remove[i].setAttribute("hidden", "hidden");
-}
+	$('#btn_edit').click(event => {
+		$('#btn_create, #btn_close').toggleClass('active', false);
+		$('#btn_edit').toggleClass('active');
+		$('#btn_create, #btn_edit, #btn_close').change();
+	}).change(() => {
+		if ($('#btn_edit').hasClass('active')) $('.btn_edit').addClass("d-flex").removeClass("d-none");
+		else $('.btn_edit').addClass("d-none").removeClass("d-flex");
+	});
+
+	$('#btn_close').click(event => {
+		$('#btn_create, #btn_edit').toggleClass('active', false);
+		$('#btn_close').toggleClass('active');
+		$('#btn_create, #btn_edit, #btn_close').change();
+	}).change(() => {
+		if ($('#btn_close').hasClass('active')) $('.btn_close').addClass("d-flex").removeClass("d-none");
+		else $('.btn_close').addClass("d-none").removeClass("d-flex");
+	});
+});
 
 window.initMap = () => {
 	let AzrieliLocation = { lat: 32.07458646100024, lng: 34.79189151265392 }
