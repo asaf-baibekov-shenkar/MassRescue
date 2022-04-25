@@ -12,6 +12,10 @@
     padding-top: 0.2rem;
 }
 
+#filter {
+    z-index: 1;
+}
+
 #filter .btn.active svg,
 #filter .btn:hover svg,
 #list .btn svg {
