@@ -10,7 +10,7 @@
     <?php
     $userN = $_GET["Username"];
     $pass = $_GET["Password"];
-    echo "The user name is:" . $userN . " and The password is:" . $pass . "";
+    echo "Hello :" . $userN . "";
     ?>
 </body>
 </html>
