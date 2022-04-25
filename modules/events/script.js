@@ -9,6 +9,15 @@ $(function() {
 
 	$('#btn_create').click(event => {
 		$('#btn_edit, #btn_close').toggleClass('active', false).change();
+		$('#event-modal-title').html("Create Event");
+		$('#event-modal').on('show.bs.modal', () => {
+			$('#event-modal-title').html("Create Event");
+			$('#create_btn').html("Create");
+			$('#InputEventName').val('');
+			$('#InputDescription').val('');
+			$(`input[name="event_type"][value="0"]`).prop('checked', true);
+		})
+		$('#event-modal').modal('show');
 	});
 
 	$('#btn_edit').click(event => {
@@ -44,7 +53,6 @@ $(function() {
 		})
 		$('#event-modal').modal('hide');
 	})
-	$('#event-modal').on('hidden.bs.modal', () => $('#form-create-event')[0].reset())
 
 	renderList();
 });
@@ -88,6 +96,14 @@ function renderList() {
 	});
 	$('.btn_edit').click(function(event) { 
 		let index = $(this).parent().parent().attr('index');
+		$('#event-modal').on('show.bs.modal', () => {
+			let event = events[index];
+			$('#event-modal-title').html("Edit Event");
+			$('#create_btn').html("Update");
+			$('#InputEventName').val(event.title);
+			$('#InputDescription').val(event.subtitle);
+			$(`input[name="event_type"][value="${event.type}"]`).prop('checked', true);
+		})
 		$('#event-modal').modal('show');
 	});
 }
