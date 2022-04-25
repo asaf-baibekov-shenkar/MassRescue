@@ -17,6 +17,7 @@ $(function() {
 			$('#InputDescription').val('');
 			$(`input[name="event_type"][value="0"]`).prop('checked', true);
 		})
+		$('#event-modal').attr('index', -1);
 		$('#event-modal').modal('show');
 	});
 
@@ -38,19 +39,34 @@ $(function() {
 		else $('.btn_close').addClass("d-none").removeClass("d-flex");
 	});
 
-	$('#form-create-event').submit(event => {
+	$('#form-create-event').submit(function(event) {
 		event.preventDefault();
-		setListState(() => {
-			events = [{
-				title: $('[name=event_name]').val(),
-				subtitle: $('[name=event_description]').val(),
-				type: parseInt($('[name=event_type]:checked').val()),
-				coordinate: {
-					latitude: 32.07458646100024,
-					longitude: 34.79189151265392
+		let index = parseInt($(this).parent().attr('index'));
+		if (index == -1) {
+			setListState(() => {
+				events = [{
+					title: $('[name=event_name]').val(),
+					subtitle: $('[name=event_description]').val(),
+					type: parseInt($('[name=event_type]:checked').val()),
+					coordinate: {
+						latitude: 32.07458646100024,
+						longitude: 34.79189151265392
+					}
+				}, ...events]
+			})
+		} else {
+			setListState(() => {
+				events[index] = {
+					title: $('[name=event_name]').val(),
+					subtitle: $('[name=event_description]').val(),
+					type: parseInt($('[name=event_type]:checked').val()),
+					coordinate: {
+						latitude: 32.07458646100024,
+						longitude: 34.79189151265392
+					}
 				}
-			}, ...events]
-		})
+			})
+		}
 		$('#event-modal').modal('hide');
 	})
 
@@ -104,6 +120,7 @@ function renderList() {
 			$('#InputDescription').val(event.subtitle);
 			$(`input[name="event_type"][value="${event.type}"]`).prop('checked', true);
 		})
+		$('#event-modal').attr('index', index);
 		$('#event-modal').modal('show');
 	});
 }
