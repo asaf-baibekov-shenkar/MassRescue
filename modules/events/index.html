@@ -126,32 +126,32 @@
 		<form id="form-create-event" action="" method="get">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<div class="modal-header justify-content-center">
+						<h5 class="modal-title" id="staticBackdropLabel">Create Event</h5>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
-							<label for="InputEventName">Event Name</label>
-							<input type="text" class="form-control" id="InputEventName" placeholder="Event Name" name="event_name" required>
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="basic-addon1">Event Name:</span>
+							<input type="text" class="form-control" id="InputEventName" name="event_name" required>
 						</div>
-						<div class="form-group">
-							<label for="InputDescription">Event Description</label>
-							<textarea class="form-control" id="InputDescription" placeholder="Description" name="event_description"></textarea>
+						<div class="input-group mb-3">
+							<label for="InputDescription" class="col-3 input-group-text">Description:</label>
+							<div class="col-9">
+								<textarea class="form-control" id="InputDescription" name="event_description"></textarea>
+							</div>
 						</div>
-						<label>Event type</label>
-						<br>
-						<div class="form-check form-check-inline">
-							<label class="form-check-label" for="fire_checkbox">fire</label>
-							<input class="form-check-input" id="fire_checkbox" type="radio" name="event_type" value="2" required>
-						</div>
-						<div class="form-check form-check-inline">
-							<label class="form-check-label" for="earthquake_checkbox">earthquake</label>
-							<input class="form-check-input" id="earthquake_checkbox" type="radio" name="event_type" value="1" required>
-						</div>
-						<div class="form-check form-check-inline">
-							<label class="form-check-label" for="other_checkbox">other</label>
-							<input class="form-check-input" id="other_checkbox" type="radio" name="event_type" value="0" required>
+
+						<div class="input-group mb-3 justify-content-center">
+							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+								<input type="radio" class="btn-check" name="event_type" id="fire_checkbox" value="2" required>
+								<label class="btn btn-outline-primary" for="fire_checkbox">Fire</label>
+							  
+								<input type="radio" class="btn-check" name="event_type" id="earthquake_checkbox" value="1" required>
+								<label class="btn btn-outline-primary" for="earthquake_checkbox">Earthquake</label>
+							  
+								<input type="radio" class="btn-check" name="event_type" id="other_checkbox" value="0" required checked>
+								<label class="btn btn-outline-primary" for="other_checkbox">Other</label>
+							</div>
 						</div>
 						<iframe width="100%" height="300px" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Tel%20Aviv%20azrieli+(Mass%20Rescue)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
 						</iframe>
