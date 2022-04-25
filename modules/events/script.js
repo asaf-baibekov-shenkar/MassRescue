@@ -44,6 +44,7 @@ $(function() {
 		})
 		$('#event-modal').modal('hide');
 	})
+	$('#event-modal').on('hidden.bs.modal', () => $('#form-create-event')[0].reset())
 
 	renderList();
 });
@@ -84,6 +85,10 @@ function renderList() {
 			events.splice(index, 1);
 		})
 		$('.btn_close').addClass("d-flex").removeClass("d-none");
+	});
+	$('.btn_edit').click(function(event) { 
+		let index = $(this).parent().parent().attr('index');
+		$('#event-modal').modal('show');
 	});
 }
 
