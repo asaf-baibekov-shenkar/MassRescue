@@ -105,7 +105,7 @@ function renderList() {
 	).forEach(element => element.appendTo('#list'));
 
 	$('.cell').click(function() {
-		window.location.href = './event.html';
+		window.location.href = '../event/index.html';
 		return false;
 	});
 	
