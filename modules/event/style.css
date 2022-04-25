@@ -1,3 +1,11 @@
+.breadcrumb {
+    --bs-breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8cGF0aCBkPSJNOS4yOSAxNS44OEwxMy4xNyAxMiA5LjI5IDguMTJjLS4zOS0uMzktLjM5LTEuMDIgMC0xLjQxLjM5LS4zOSAxLjAyLS4zOSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MUwxMC43IDE3LjNjLS4zOS4zOS0xLjAyLjM5LTEuNDEgMC0uMzgtLjM5LS4zOS0xLjAzIDAtMS40MnoiPjwvcGF0aD4KPC9zdmc+)
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    padding-top: 0.2rem;
+}
+
 #filter {
     z-index: 1;
 }
