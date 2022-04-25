@@ -150,7 +150,7 @@
 		</div>
 	</main>
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-		<form action="" method="get">
+		<form id="form-create-event" action="" method="get">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -170,22 +170,22 @@
 						<br>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label" for="fire_checkbox">fire</label>
-							<input class="form-check-input" id="fire_checkbox" type="radio" name="event_type" value="fire" required>
+							<input class="form-check-input" id="fire_checkbox" type="radio" name="event_type" value="2" required>
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label" for="earthquake_checkbox">earthquake</label>
-							<input class="form-check-input" id="earthquake_checkbox" type="radio" name="event_type" value="earthquake" required>
+							<input class="form-check-input" id="earthquake_checkbox" type="radio" name="event_type" value="1" required>
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label" for="other_checkbox">other</label>
-							<input class="form-check-input" id="other_checkbox" type="radio" name="event_type" value="other" required>
+							<input class="form-check-input" id="other_checkbox" type="radio" name="event_type" value="0" required>
 						</div>
 						<iframe width="100%" height="300px" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Tel%20Aviv%20azrieli+(Mass%20Rescue)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
 						</iframe>
 					</div>
 					<div class="modal-footer justify-content-evenly">
 						<button type="button" class="col-3 btn btn-danger" data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="col-3 btn btn-success">Create</button>
+						<button type="submit" class="col-3 btn btn-success" id="create_btn">Create</button>
 					</div>
 				</div>
 			</div>
