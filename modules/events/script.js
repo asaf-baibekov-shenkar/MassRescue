@@ -67,18 +67,39 @@ function setListState(callback) {
 
 function renderList() {
 	$('#list').empty();
-	events.map((value, index) =>
-		`<div index="${index}" class="d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">
-			<div class="d-flex align-items-center">
-				<img src="${
-					function(value) {
-						switch(value.type) {
-							case 1: return '../../images/icons/event-type-icons/earthquake.svg'
-							case 2: return '../../images/icons/event-type-icons/fire.svg'
-							default: return '../../images/icons/event-type-icons/other.svg'
-						}
-					}(value)
-				}" alt="" width="60px" height="60px">
+	events.map((value, index) => {
+		let element = $(`<div index="${index}" class="cell d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">`)
+		element.append(cell(value));
+		element.hover(function () {
+			element.css({ 'background-color': '#D6D6D6', 'cursor': 'pointer' }).removeClass('bg-light')
+		}, function () {
+			element.css({ 'background-color': '', 'cursor': '' }).addClass('bg-light')
+		});
+		return element;
+	}
+	).forEach(element => element.appendTo('#list'));
+	$('.btn_close').click(function(event) { 
+		let index = $(this).parent().parent().attr('index');
+		setListState(() => {
+			events.splice(index, 1);
+		})
+		$('.btn_close').addClass("d-flex").removeClass("d-none");
+	});
+}
+
+
+
+
+function cell(value) {
+	let svg = function(value) {
+		switch(value.type) {
+			case 1: return '../../images/icons/event-type-icons/earthquake.svg'
+			case 2: return '../../images/icons/event-type-icons/fire.svg'
+			default: return '../../images/icons/event-type-icons/other.svg'
+		}
+	}(value)
+	return `<div class="d-flex align-items-center">
+				<img src="${svg}" alt="" width="60px" height="60px">
 				<div class="h-100 d-flex flex-column justify-content-center ms-3">
 					<span class="fs-4">${value.title}</span>
 					<span>${value.subtitle}</span>
@@ -101,17 +122,10 @@ function renderList() {
 						<path d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM16.3 16.3C15.91 16.69 15.28 16.69 14.89 16.3L12 13.41L9.11 16.3C8.72 16.69 8.09 16.69 7.7 16.3C7.31 15.91 7.31 15.28 7.7 14.89L10.59 12L7.7 9.11C7.31 8.72 7.31 8.09 7.7 7.7C8.09 7.31 8.72 7.31 9.11 7.7L12 10.59L14.89 7.7C15.28 7.31 15.91 7.31 16.3 7.7C16.69 8.09 16.69 8.72 16.3 9.11L13.41 12L16.3 14.89C16.68 15.27 16.68 15.91 16.3 16.3Z"/>
 					</svg>
 				</a>
-			</div>
-		</div>`
-	).forEach(element => $(element).appendTo('#list'));
-	$('.btn_close').click(function(event) { 
-		let index = $(this).parent().parent().attr('index');
-		setListState(() => {
-			events.splice(index, 1);
-		})
-		$('.btn_close').addClass("d-flex").removeClass("d-none");
-	});
+			</div>`;
 }
+
+
 
 // types:
 // 0 - unknown
