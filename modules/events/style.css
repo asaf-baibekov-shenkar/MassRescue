@@ -16,6 +16,10 @@
     z-index: 1;
 }
 
+#list {
+    height: 96px
+}
+
 #filter .btn.active svg,
 #filter .btn:hover svg,
 #list .btn svg {
