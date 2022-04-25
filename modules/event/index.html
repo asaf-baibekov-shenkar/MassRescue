@@ -88,7 +88,7 @@
 							<input class="form-control" type="text" placeholder="Search">
 						</div>
 						<div class="col-12 col-lg-6 d-flex align-items-center justify-content-evenly">
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter" style="height: 38px; width: 38px" data-bs-toggle="modal" data-bs-target="#event-modal">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter" style="height: 38px; width: 38px">
 								<img src="../../images/icons/event-forces/firefighter.png" alt="" width="24px" height="24px">
 							</a>
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_medic" style="height: 38px; width: 38px">
@@ -119,7 +119,7 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header justify-content-center">
-						<h5 class="modal-title" id="staticBackdropLabel">Add Force</h5>
+						<h5 class="modal-title" id="event-modal-title">Add Force</h5>
 					</div>
 					<div class="modal-body">
 						<div class="input-group mb-3">
@@ -130,26 +130,6 @@
 							<label for="InputDescription" class="col-3 input-group-text">Message:</label>
 							<div class="col-9">
 								<textarea class="form-control" id="InputDescription" name="event_description"></textarea>
-							</div>
-						</div>
-
-						<div class="input-group mb-3 justify-content-center">
-							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-								<input type="radio" class="btn-check" name="event_type" id="firefighter_checkbox" value="4" required checked>
-								<label class="btn btn-outline-primary" for="firefighter_checkbox">Firefighter</label>
-							  
-								<input type="radio" class="btn-check" name="event_type" id="medic_checkbox" value="3" required>
-								<label class="btn btn-outline-primary" for="medic_checkbox">Medic</label>
-							  
-                                <input type="radio" class="btn-check" name="event_type" id="police_checkbox" value="1" required>
-								<label class="btn btn-outline-primary" for="police_checkbox">Police</label>
-
-								<input type="radio" class="btn-check" name="event_type" id="drone_checkbox" value="2" required>
-								<label class="btn btn-outline-primary" for="drone_checkbox">Drone</label>
-
-                                <input type="radio" class="btn-check" name="event_type" id="block_checkbox" value="0" required>
-								<label class="btn btn-outline-primary" for="block_checkbox">Block</label>
-
 							</div>
 						</div>
 						<iframe width="100%" height="300px" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Tel%20Aviv%20azrieli+(Mass%20Rescue)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
