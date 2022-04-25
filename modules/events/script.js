@@ -68,7 +68,7 @@ function setListState(callback) {
 function renderList() {
 	$('#list').empty();
 	events.map((value, index) => {
-		let element = $(`<div index="${index}" class="cell d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">`)
+		let element = $(`<div index="${index}" class="cell shadow-lg d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">`)
 		element.append(cell(value));
 		element.hover(function () {
 			element.css({ 'background-color': '#D6D6D6', 'cursor': 'pointer' }).removeClass('bg-light')
