@@ -42,7 +42,7 @@ $(function() {
 				}
 			}, ...events]
 		})
-		$('#staticBackdrop').modal('hide');
+		$('#event-modal').modal('hide');
 	})
 
 	renderList();
