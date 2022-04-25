@@ -110,6 +110,7 @@ function renderList() {
 	});
 	
 	$('.btn_close').click(function(event) { 
+		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
 		setListState(() => {
 			events.splice(index, 1);
@@ -117,6 +118,7 @@ function renderList() {
 		$('.btn_close').addClass("d-flex").removeClass("d-none");
 	});
 	$('.btn_edit').click(function(event) { 
+		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
 		$('#event-modal').on('show.bs.modal', () => {
 			let event = events[index];
