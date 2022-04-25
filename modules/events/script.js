@@ -103,6 +103,12 @@ function renderList() {
 		return element;
 	}
 	).forEach(element => element.appendTo('#list'));
+
+	$('.cell').click(function() {
+		window.location.href = './event.html';
+		return false;
+	});
+	
 	$('.btn_close').click(function(event) { 
 		let index = $(this).parent().parent().attr('index');
 		setListState(() => {
