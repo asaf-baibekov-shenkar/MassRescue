@@ -12,5 +12,6 @@
     $pass = $_GET["Password"];
     echo "Hello :" . $userN . "";
     ?>
+    <a href="../events/index.html">Login Successfully Continue To Page</a>
 </body>
 </html>
