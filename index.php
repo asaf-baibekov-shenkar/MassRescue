@@ -4,12 +4,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 	<!-- google font insert style -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
 
 	<title>Mass Rescue</title>
+	<script src="./script.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);">
@@ -38,20 +41,19 @@
 						<a class="nav-link text-center px-4 fs-5" href="#">Contact Us</a>
 					</li>
 					<li class="nav-item mb-md-0 mb-3">
-						<a class="nav-link btn btn-secondary px-4 fs-5" href="./modules/login.html">Login</a>
+						<a id="login_button" class="nav-link btn btn-secondary px-4 fs-5" href="#">Login</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<main style="height: calc(100vh - 100px); background-color: var(--bs-gray-800);">
-		<div class="container h-100">
-			<div class="h-100 col-md-6 d-flex flex-column align-items-center align-items-md-start justify-content-center">
-				<h1 class="text-white">Mass Rescue</h1>
-				<h2 class="text-white">It's all about Savings lives.</h2>
-				<p class="text-white text-center text-md-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum.</p>
-			</div>
+    <main class="overflow-scroll" style="height: calc(100vh - 100px); background-color: var(--bs-gray-800);">
+		<div id="intro" class="h-100">
+			<?php include('components/intro.php') ?>
 		</div>
-	</main>
+		<div id="login" class="h-100">
+			<?php include('components/login.php') ?>
+		</div>
+    </main>
 </body>
 </html>
