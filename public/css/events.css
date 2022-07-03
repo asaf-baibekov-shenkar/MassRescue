@@ -1,0 +1,45 @@
+:root {
+	--button-bg-color: #EBEBEB;
+	--button-active-create-bg-color: #4CE044;
+	--button-active-edit-bg-color: #FFB30F;
+	--button-active-close-bg-color: #FF3823;
+}
+
+.breadcrumb {
+	--bs-breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8cGF0aCBkPSJNOS4yOSAxNS44OEwxMy4xNyAxMiA5LjI5IDguMTJjLS4zOS0uMzktLjM5LTEuMDIgMC0xLjQxLjM5LS4zOSAxLjAyLS4zOSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MUwxMC43IDE3LjNjLS4zOS4zOS0xLjAyLjM5LTEuNDEgMC0uMzgtLjM5LS4zOS0xLjAzIDAtMS40MnoiPjwvcGF0aD4KPC9zdmc+)
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+	padding-top: 0.2rem;
+}
+
+#filter {
+	z-index: 1;
+}
+
+#list {
+	height: 96px
+}
+
+#filter .btn.active svg,
+#filter .btn:hover svg,
+#list .btn svg {
+	fill: white;
+}
+
+#filter #btn_create.active,
+#filter #btn_create:hover {
+	background-color: var(--button-active-create-bg-color);
+}
+
+#filter #btn_edit.active,
+#filter #btn_edit:hover,
+#list .btn_edit {
+	background-color: var(--button-active-edit-bg-color);
+}
+
+#filter #btn_close.active,
+#filter #btn_close:hover,
+#list .btn_close {
+	background-color: var(--button-active-close-bg-color);
+}

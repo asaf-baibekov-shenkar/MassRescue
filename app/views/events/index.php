@@ -16,10 +16,10 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 	<!-- google maps api -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&callback=initMap"></script>
+	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&callback=initMap"></script> -->
 
-	<link rel="stylesheet" type="text/css" href="./style.css" />
-	<script src="./script.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
+	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 						<span class="navbar-toggler-icon"></span>
 				</button>
 				<a class="d-flex align-items-center nav-link text-light mx-3 my-2 p-0" href="./index.html">
-					<img class="bg-white rounded-circle" src="../../images/profile_picture.jpg" width="74" height="74" alt="">
+					<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="74" height="74" alt="">
 				</a>
 				<ol class="breadcrumb mb-0">
 					<li class="breadcrumb-item">Events</li>
@@ -42,7 +42,7 @@
 		</div>
 		<div class="offcanvas offcanvas-start rounded-start bg-dark shadow-lg overflow-hidden" id="offcanvas-main" tabindex="-1" style="border-radius: 2.5rem; width: 350px;">
 			<div class="offcanvas-header flex-column gap-1">
-				<img class="bg-white rounded-circle" src="../../images/profile_picture.jpg" width="120" height="120" alt="">
+				<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="120" height="120" alt="">
 				<span class="offcanvas-title text-light fs-3 fw-bolder">Ariella Katzir</span>
 				<span class="text-light fs-5">205374333</span>
 			</div>
@@ -115,6 +115,7 @@
 					</div>
 				</div>
 				<div id="list" class="overflow-auto flex-grow-1">
+					<?php include 'event_cell.php'; ?>
 				</div>
 			</div>
 			<div class="col col-lg-6 h-100 p-0">
