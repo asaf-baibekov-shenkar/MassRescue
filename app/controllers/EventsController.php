@@ -48,8 +48,13 @@ class EventsController extends Controller {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
 			return;
 		}
-		$event = Event::find($_GET['id']);
-		echo '{ "event": '; print_r($event->toJson()); echo ' }';
+		try {
+			$event = Event::findOrFail($_GET['id']);
+			echo '{ "event": '; print_r($event->toJson()); echo ' }';
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			$errors['id'] = "id not exist";
+			echo '{ "errors": '; echo json_encode($errors); echo ' }';
+		}
 	}
 
 	public function eventsList() {
@@ -66,18 +71,23 @@ class EventsController extends Controller {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
 			return;
 		}
-		$event = Event::find($_POST['id']);
-		if (!empty($_POST['title']))
-			$event->update(['title' => $_POST['title']]);
-		if (!empty($_POST['subtitle']))
-			$event->update(['subtitle' => $_POST['subtitle']]);
-		if (!empty($_POST['type']))
-			$event->update(['type' => $_POST['type']]);
-		if (!empty($_POST['latitude']))
-			$event->update(['latitude' => $_POST['latitude']]);
-		if (!empty($_POST['longitude']))
-			$event->update(['longitude' => $_POST['longitude']]);
-		echo '{ "event": '; print_r($event->toJson()); echo ' }';
+		try {
+			$event = Event::findOrFail($_POST['id']);
+			if (!empty($_POST['title']))
+				$event->update(['title' => $_POST['title']]);
+			if (!empty($_POST['subtitle']))
+				$event->update(['subtitle' => $_POST['subtitle']]);
+			if (!empty($_POST['type']))
+				$event->update(['type' => $_POST['type']]);
+			if (!empty($_POST['latitude']))
+				$event->update(['latitude' => $_POST['latitude']]);
+			if (!empty($_POST['longitude']))
+				$event->update(['longitude' => $_POST['longitude']]);
+			echo '{ "event": '; print_r($event->toJson()); echo ' }';
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			$errors['id'] = "id not exist";
+			echo '{ "errors": '; echo json_encode($errors); echo ' }';
+		}
 	}
 
 	public function remove() {
