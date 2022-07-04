@@ -1,6 +1,7 @@
 window.initMap = () => {
 	let AzrieliLocation = { lat: 32.07458646100024, lng: 34.79189151265392 }
-	let map = new google.maps.Map(document.getElementById("map"), {
+	let mapElement = document.getElementById("map");
+	let map = new google.maps.Map(mapElement, {
 		center: AzrieliLocation,
 		zoom: 16,
 	});

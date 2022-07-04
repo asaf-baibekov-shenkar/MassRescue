@@ -1,8 +1,4 @@
-<?php
-	$url = BASE_URL . 'events/eventsList';
-	$content = file_get_contents($url);
-	$json = json_decode($content, true)["events"];
-?>
+<?php $json = json_decode($data['events'], true)["events"]; ?>
 <?php foreach ($json as $object) : ?>
 <?php
 	$type_svg = (function ($type) {

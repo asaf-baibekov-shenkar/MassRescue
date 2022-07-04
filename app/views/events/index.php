@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 	<!-- google maps api -->
-	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&callback=initMap"></script> -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&callback=initMap"></script>
 
 	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>

@@ -5,7 +5,8 @@ class EventsController extends Controller {
 	public function index() {
 		$this->view('events/index', [
 			'css' => CSS_PATH . 'events.css',
-			'js' => JS_PATH . 'events.js'
+			'js' => JS_PATH . 'events.js',
+			'events' => '{ "events": ' . Event::all()->toJson() . ' }'
 		]);
 	}
 
