@@ -79,6 +79,25 @@ class EventsController extends Controller {
 			$event->update(['longitude' => $_POST['longitude']]);
 		echo '{ "event": '; print_r($event->toJson()); echo ' }';
 	}
+
+	public function remove() {
+		header('Content-Type: application/json');
+		$errors = [];
+		if (empty($_POST['id']))
+			$errors['id'] = "id is missing";
+		if (!empty($errors)) {
+			echo '{ "errors": '; echo json_encode($errors); echo ' }';
+			return;
+		}
+		try {
+			$event = Event::findOrFail($_POST['id']);
+			echo '{ "event": '; print_r($event); echo ' }';
+			$event->delete();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			$errors['id'] = "id not exist";
+			echo '{ "errors": '; echo json_encode($errors); echo ' }';
+		}
+	}
 }
 
 ?>
