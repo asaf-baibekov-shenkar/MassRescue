@@ -43,3 +43,8 @@
 #list .btn_close {
 	background-color: var(--button-active-close-bg-color);
 }
+
+.cell:hover {
+	background-color: #D6D6D6 !important;
+	cursor: pointer;
+}
