@@ -1,13 +1,20 @@
 window.initMap = () => {
-	let AzrieliLocation = { lat: 32.07458646100024, lng: 34.79189151265392 }
 	let mapElement = document.getElementById("map");
 	let map = new google.maps.Map(mapElement, {
-		center: AzrieliLocation,
+		center: {
+			lat: parseFloat(events[0].latitude),
+			lng: parseFloat(events[0].longitude)
+		},
 		zoom: 16,
 	});
-	const marker = new google.maps.Marker({
-		position: AzrieliLocation,
-		map: map,
+	let markers = events.map(event => {
+		return new google.maps.Marker({
+			position: {
+				lat: parseFloat(event.latitude),
+				lng: parseFloat(event.longitude)
+			},
+			map: map,
+		});
 	});
 };
 
