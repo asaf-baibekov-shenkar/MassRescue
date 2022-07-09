@@ -1,11 +1,11 @@
 window.initMap = () => {
 	let mapElement = document.getElementById("map");
-	let map = new google.maps.Map(mapElement, {
+	window.map = new google.maps.Map(mapElement, {
 		center: {
 			lat: parseFloat(events[0].latitude),
 			lng: parseFloat(events[0].longitude)
 		},
-		zoom: 16,
+		zoom: 9,
 	});
 	let markers = events.map(event => {
 		return new google.maps.Marker({
@@ -13,7 +13,7 @@ window.initMap = () => {
 				lat: parseFloat(event.latitude),
 				lng: parseFloat(event.longitude)
 			},
-			map: map,
+			map: window.map,
 		});
 	});
 };
@@ -59,6 +59,15 @@ $(function() {
 		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
 		return false;
 	});
+
+	$('.cell').hover(function () {
+		let index = $(this).attr('index');
+		let event = events.filter(event => event.event_id == index)[0]
+		window.map.panTo({
+			lat: parseFloat(event.latitude),
+			lng: parseFloat(event.longitude)
+		});	
+	}, function () { });
 	$('.btn_close').click(function(event) { 
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
