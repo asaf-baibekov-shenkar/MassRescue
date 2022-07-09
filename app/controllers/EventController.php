@@ -22,14 +22,14 @@ class EventController extends Controller {
 	public function create() {
 		header('Content-Type: application/json');
 		$errors = [];
-		if (empty($_POST['event_id']))
+		if (!isset($_POST['event_id']))
 			$errors['event_id'] = "event_id is missing";
-		if (empty($_POST['title']))
+		if (!isset($_POST['title']))
 			$errors['title'] = "title is missing";
-		if (empty($_POST['subtitle']))
+		if (!isset($_POST['subtitle']))
 			$errors['subtitle'] = "subtitle is missing";
 
-		if (empty($_POST['type']))
+		if (!isset($_POST['type']))
 			$errors['type'] = "type is missing";
 		else if ($_POST['type'] != "firefighter" &&
 				 $_POST['type'] != "medic" &&
@@ -38,9 +38,9 @@ class EventController extends Controller {
 				 $_POST['type'] != 'block')
 			$errors['type'] = "type has to be firefighter, medic, police, drone or block";
 
-		if (empty($_POST['latitude']))
+		if (!isset($_POST['latitude']))
 			$errors['latitude'] = "latitude is missing";
-		if (empty($_POST['longitude']))
+		if (!isset($_POST['longitude']))
 			$errors['longitude'] = "longitude is missing";
 		if (!empty($errors)) {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
@@ -63,7 +63,7 @@ class EventController extends Controller {
 		header('Content-Type: application/json');
 		$id = $_GET['id'];
 		$errors = [];
-		if (empty($id))
+		if (!isset($id))
 			$errors['id'] = "id is missing";
 		if (!empty($errors)) {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
@@ -81,7 +81,7 @@ class EventController extends Controller {
 		header('Content-Type: application/json');
 		$event_id = $_GET['event_id'];
 		$errors = [];
-		if (empty($event_id))
+		if (!isset($event_id))
 			$errors['event_id'] = "event_id is missing";
 		if (!empty($errors)) {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
@@ -99,9 +99,9 @@ class EventController extends Controller {
 	public function updateForce() {
 		header('Content-Type: application/json');
 		$errors = [];
-		if (empty($_POST['event_id']))
+		if (!isset($_POST['event_id']))
 			$errors['event_id'] = "event_id is missing";
-		if (empty($_POST['force_id']))
+		if (!isset($_POST['force_id']))
 			$errors['force_id'] = "force_id is missing";
 		if (!empty($errors)) {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
@@ -112,15 +112,15 @@ class EventController extends Controller {
 			$force_id = $_POST['force_id'];
 			Event::findOrFail($event_id);
 			$force = Force::findOrFail($force_id);
-			if (!empty($_POST['title']))
+			if (isset($_POST['title']))
 				$force->update(['title' => $_POST['title']]);
-			if (!empty($_POST['subtitle']))
+			if (isset($_POST['subtitle']))
 				$force->update(['subtitle' => $_POST['subtitle']]);
-			if (!empty($_POST['type']))
+			if (isset($_POST['type']))
 				$force->update(['type' => $_POST['type']]);
-			if (!empty($_POST['latitude']))
+			if (isset($_POST['latitude']))
 				$force->update(['latitude' => $_POST['latitude']]);
-			if (!empty($_POST['longitude']))
+			if (isset($_POST['longitude']))
 				$force->update(['longitude' => $_POST['longitude']]);
 			echo '{ "force": '; print_r($force->toJson()); echo ' }';
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
@@ -135,9 +135,9 @@ class EventController extends Controller {
 	public function removeForce() {
 		header('Content-Type: application/json');
 		$errors = [];
-		if (empty($_POST['event_id']))
+		if (!isset($_POST['event_id']))
 			$errors['event_id'] = "event_id is missing";
-		if (empty($_POST['force_id']))
+		if (!isset($_POST['force_id']))
 			$errors['force_id'] = "force_id is missing";
 		if (!empty($errors)) {
 			echo '{ "errors": '; echo json_encode($errors); echo ' }';
