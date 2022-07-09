@@ -7,7 +7,7 @@ window.initMap = () => {
 		},
 		zoom: 9,
 	});
-	let markers = events.map(event => {
+	window.mainMapMarkers = events.map(event => {
 		return new google.maps.Marker({
 			position: {
 				lat: parseFloat(event.latitude),
@@ -16,6 +16,16 @@ window.initMap = () => {
 			map: window.map,
 		});
 	});
+
+	let mapFormElement = document.getElementById("map_form");
+	window.map_form = new google.maps.Map(mapFormElement, {
+		center: {
+			lat: parseFloat(events[0].latitude),
+			lng: parseFloat(events[0].longitude)
+		},
+		zoom: 10,
+	});
+	window.formMapMarkers = [];
 };
 
 $(function() {
@@ -106,7 +116,20 @@ function showModal(index, eventName, eventDescription, eventType, latitude, long
 		$(`input[name="event_type"][value="0"]`).prop('checked', false);
 		$(`input[name="event_type"][value="1"]`).prop('checked', false);
 		$(`input[name="event_type"][value="2"]`).prop('checked', false);
-		$(`input[name="event_type"][value="${index <= 0 ? 0 : eventType}"]`).prop('checked', true); 
+		$(`input[name="event_type"][value="${index <= 0 ? 0 : eventType}"]`).prop('checked', true);
+
+		window.formMapMarkers.forEach(marker => { marker.setMap(null); });
+		if (index > 0) {
+			window.formMapMarkers.push(new google.maps.Marker({
+				position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+				map: window.map_form,
+			}));
+			window.map_form.setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
+		} else {
+			window.map_form.setCenter({ lat: 31.734394, lng: 35.204517 })
+			window.map_form.setZoom(6);
+		}
+
 		$('#create_btn').html(index <= 0 ? "Create" : "Edit");
 	})
 	$('#event-modal').modal('show');

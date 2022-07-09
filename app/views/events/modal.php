@@ -29,8 +29,7 @@
 							<label class="btn btn-outline-primary" for="other_checkbox">Other</label>
 						</div>
 					</div>
-					<iframe width="100%" height="300px" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Tel%20Aviv%20azrieli+(Mass%20Rescue)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-					</iframe>
+					<div id="map_form" class="w-100" style="height: 300px"></div>
 				</div>
 				<div class="modal-footer justify-content-evenly">
 					<button type="button" class="col-3 btn btn-danger" data-bs-dismiss="modal">Close</button>
