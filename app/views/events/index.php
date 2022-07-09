@@ -20,6 +20,9 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
+	<script>
+		let events = <?php print_r(json_encode(json_decode($data['events'], true)["events"])) ?>;
+	</script>
 </head>
 
 <body>

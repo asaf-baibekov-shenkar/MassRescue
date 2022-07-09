@@ -16,16 +16,7 @@ $(function() {
 
 	$('#btn_create').click(event => {
 		$('#btn_edit, #btn_close').toggleClass('active', false).change();
-		$('#event-modal-title').html("Create Event");
-		$('#event-modal').on('show.bs.modal', () => {
-			$('#event-modal-title').html("Create Event");
-			$('#create_btn').html("Create");
-			$('#InputEventName').val('');
-			$('#InputDescription').val('');
-			$(`input[name="event_type"][value="0"]`).prop('checked', true);
-		})
-		$('#event-modal').attr('index', -1);
-		$('#event-modal').modal('show');
+		showModal(-1);
 	});
 
 	$('#btn_edit').click(event => {
@@ -70,9 +61,35 @@ $(function() {
 	$('.btn_edit').click(function(event) { 
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
-		$('#event-modal').on('show.bs.modal', () => {
-		})
-		$('#event-modal').attr('index', index);
-		$('#event-modal').modal('show');
+		let eventName = events[index - 1].title;
+		let eventDescription = events[index - 1].subtitle;
+		
+		let eventType = (() => {
+			switch (events[index - 1].type) {
+				case "earthquake": return 1;
+				case "fire": return 2;
+				default: return 0;
+			}
+		})();
+		let latitude = events[index - 1].latitude
+		let longitude = events[index - 1].longitude
+		showModal(index, eventName, eventDescription, eventType, latitude, longitude);
 	});
 });
+
+
+
+function showModal(index, eventName, eventDescription, eventType, latitude, longitude) {
+	$('#event-modal').attr('index', index);
+	$('#event-modal').on('show.bs.modal', () => {
+		$('#event-modal-title').html(index <= 0 ? "Create Event" : "Edit Event");
+		$('#InputEventName').val(index <= 0 ? "" : eventName);
+		$('#InputDescription').val(index <= 0 ? "" : eventDescription);
+		$(`input[name="event_type"][value="0"]`).prop('checked', false);
+		$(`input[name="event_type"][value="1"]`).prop('checked', false);
+		$(`input[name="event_type"][value="2"]`).prop('checked', false);
+		$(`input[name="event_type"][value="${index <= 0 ? 0 : eventType}"]`).prop('checked', true); 
+		$('#create_btn').html(index <= 0 ? "Create" : "Edit");
+	})
+	$('#event-modal').modal('show');
+}
