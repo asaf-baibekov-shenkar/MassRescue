@@ -79,10 +79,8 @@ $(function() {
 	$('.cell').hover(function () {
 		let index = $(this).attr('index');
 		let event = events.filter(event => event.event_id == index)[0]
-		window.map.panTo({
-			lat: parseFloat(event.latitude),
-			lng: parseFloat(event.longitude)
-		});	
+		if (typeof google === 'object' && typeof google.maps === 'object')
+			window.map.panTo({ lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) });
 	}, function () { });
 	$('.btn_close').click(function(event) { 
 		event.stopPropagation();
@@ -114,6 +112,7 @@ function showModal(index, eventName, eventDescription, eventType, latitude, long
 		$('#InputDescription').val(index <= 0 ? "" : eventDescription);
 		$(`input[name="type"][value="${index <= 0 ? "" : eventType}"]`).prop('checked', true);
 
+		if (typeof google === 'object' && typeof google.maps === 'object') {
 			window.formMapMarkers.forEach(marker => { marker.setMap(null); });
 			if (index > 0) {
 				window.formMapMarkers.push(new google.maps.Marker({
@@ -124,6 +123,7 @@ function showModal(index, eventName, eventDescription, eventType, latitude, long
 			} else {
 				window.map_form.setCenter({ lat: 31.734394, lng: 35.204517 })
 				window.map_form.setZoom(6);
+			}
 		}
 
 		$('#create_btn').html(index <= 0 ? "Create" : "Edit");
