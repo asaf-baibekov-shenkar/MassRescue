@@ -50,29 +50,9 @@ $(function() {
 		event.preventDefault();
 		let index = parseInt($(this).parent().attr('index'));
 		if (index == -1) {
-			setListState(() => {
-				events = [{
-					title: $('[name=event_name]').val(),
-					subtitle: $('[name=event_description]').val(),
-					type: parseInt($('[name=event_type]:checked').val()),
-					coordinate: {
-						latitude: 32.07458646100024,
-						longitude: 34.79189151265392
-					}
-				}, ...events]
-			})
+			
 		} else {
-			setListState(() => {
-				events[index] = {
-					title: $('[name=event_name]').val(),
-					subtitle: $('[name=event_description]').val(),
-					type: parseInt($('[name=event_type]:checked').val()),
-					coordinate: {
-						latitude: 32.07458646100024,
-						longitude: 34.79189151265392
-					}
-				}
-			})
+
 		}
 		$('#event-modal').modal('hide');
 	})
@@ -84,9 +64,6 @@ $(function() {
 	$('.btn_close').click(function(event) { 
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
-		setListState(() => {
-			events.splice(index, 1);
-		})
 		$('.btn_close').addClass("d-flex").removeClass("d-none");
 	});
 
@@ -94,18 +71,8 @@ $(function() {
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
 		$('#event-modal').on('show.bs.modal', () => {
-			let event = events[index];
-			$('#event-modal-title').html("Edit Event");
-			$('#create_btn').html("Update");
-			$('#InputEventName').val(event.title);
-			$('#InputDescription').val(event.subtitle);
-			$(`input[name="event_type"][value="${event.type}"]`).prop('checked', true);
 		})
 		$('#event-modal').attr('index', index);
 		$('#event-modal').modal('show');
 	});
 });
-
-let events = [
-
-]
