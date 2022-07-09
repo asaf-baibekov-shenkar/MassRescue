@@ -76,26 +76,11 @@ $(function() {
 		}
 		$('#event-modal').modal('hide');
 	})
-});
-
-function renderList() {
-	events.map((value, index) => {
-		let element = $(`<div index="${index}" class="cell shadow-lg d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">`)
-		element.append(cell(value));
-		element.hover(function () {
-			element.css({ 'background-color': '#D6D6D6', 'cursor': 'pointer' }).removeClass('bg-light')
-		}, function () {
-			element.css({ 'background-color': '', 'cursor': '' }).addClass('bg-light')
-		});
-		return element;
-	}
-	).forEach(element => element.appendTo('#list'));
-
 	$('.cell').click(function() {
-		window.location.href = '../event/index.html';
+		let index = $(this).attr('index');
+		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
 		return false;
 	});
-
 	$('.btn_close').click(function(event) { 
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
@@ -119,7 +104,7 @@ function renderList() {
 		$('#event-modal').attr('index', index);
 		$('#event-modal').modal('show');
 	});
-}
+});
 
 let events = [
 
