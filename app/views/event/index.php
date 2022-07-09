@@ -1,3 +1,4 @@
+<?php $event = json_decode($data['event'], true)["event"]; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<title>Mass Rescue - Events</title>
+	<title>Mass Rescue - Event</title>
 
 	<!-- https://www.daterangepicker.com/ -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -18,8 +19,8 @@
 	<!-- google maps api -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&callback=initMap"></script>
 
-	<link rel="stylesheet" type="text/css" href="./style.css" />
-	<script src="./script.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
+	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
 </head>
 
 <body>
@@ -33,17 +34,17 @@
 						<span class="navbar-toggler-icon"></span>
 				</button>
 				<a class="d-flex align-items-center nav-link text-light mx-3 my-2 p-0" href="../events/index.html">
-					<img class="bg-white rounded-circle" src="../../images/profile_picture.jpg" width="74" height="74" alt="">
+					<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="74" height="74" alt="">
 				</a>
 				<ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a class="text-light" href="../events/index.html">Events</a></li>
-                    <li class="breadcrumb-item">Tel Aviv - Azrieli Earthquake</li>
-                </ol>
+					<li class="breadcrumb-item"><a class="text-light" href="<?php echo BASE_URL . 'events' ?>">Events</a></li>
+					<li class="breadcrumb-item"><?php echo $event["title"]; ?></li>
+				</ol>
 			</div>
 		</div>
 		<div class="offcanvas offcanvas-start rounded-start bg-dark shadow-lg overflow-hidden" id="offcanvas-main" tabindex="-1" style="border-radius: 2.5rem; width: 350px;">
 			<div class="offcanvas-header flex-column gap-1">
-				<img class="bg-white rounded-circle" src="../../images/profile_picture.jpg" width="120" height="120" alt="">
+				<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="120" height="120" alt="">
 				<span class="offcanvas-title text-light fs-3 fw-bolder">Ariella Katzir</span>
 				<span class="text-light fs-5">205374333</span>
 			</div>
@@ -89,24 +90,25 @@
 						</div>
 						<div class="col-12 col-lg-6 d-flex align-items-center justify-content-evenly">
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter" style="height: 38px; width: 38px">
-								<img src="../../images/icons/event-forces/firefighter.png" alt="" width="24px" height="24px">
+								<img src="<?php echo ICONS_PATH . 'event-forces/firefighter.png' ?>" alt="" width="24px" height="24px">
 							</a>
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_medic" style="height: 38px; width: 38px">
-								<img src="../../images/icons/event-forces/medic.png" alt="" width="24px" height="24px">
+								<img src="<?php echo ICONS_PATH . 'event-forces/medic.png' ?>" alt="" width="24px" height="24px">
 							</a>
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_police" style="height: 38px; width: 38px">
-								<img src="../../images/icons/event-forces/police.png" alt="" width="24px" height="24px">
+								<img src="<?php echo ICONS_PATH . 'event-forces/police.png' ?>" alt="" width="24px" height="24px">
 							</a>
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_drone" style="height: 38px; width: 38px">
-								<img src="../../images/icons/event-forces/drone.png" alt="" width="24px" height="24px">
+								<img src="<?php echo ICONS_PATH . 'event-forces/drone.png' ?>" alt="" width="24px" height="24px">
 							</a>
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_block" style="height: 38px; width: 38px">
-								<img src="../../images/icons/event-forces/block.png" alt="" width="24px" height="24px">
+								<img src="<?php echo ICONS_PATH . 'event-forces/block.png' ?>" alt="" width="24px" height="24px">
 							</a>
 						</div>
 					</div>
 				</div>
 				<div id="list" class="overflow-auto flex-grow-1">
+					<?php include 'force_cell.php'; ?>
 				</div>
 			</div>
 			<div class="col col-lg-6 h-100 p-0">
