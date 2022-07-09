@@ -19,13 +19,13 @@
 
 					<div class="input-group mb-3 justify-content-center">
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							<input type="radio" class="btn-check" name="type" id="fire_checkbox" value="2" required>
+							<input type="radio" class="btn-check" name="type" id="fire_checkbox" value="fire" required>
 							<label class="btn btn-outline-primary" for="fire_checkbox">Fire</label>
 							
-							<input type="radio" class="btn-check" name="type" id="earthquake_checkbox" value="1" required>
+							<input type="radio" class="btn-check" name="type" id="earthquake_checkbox" value="earthquake" required>
 							<label class="btn btn-outline-primary" for="earthquake_checkbox">Earthquake</label>
 							
-							<input type="radio" class="btn-check" name="type" id="other_checkbox" value="0" required checked>
+							<input type="radio" class="btn-check" name="type" id="other_checkbox" value="" required checked>
 							<label class="btn btn-outline-primary" for="other_checkbox">Other</label>
 						</div>
 					</div>
