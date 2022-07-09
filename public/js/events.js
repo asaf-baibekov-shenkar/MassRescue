@@ -109,10 +109,27 @@ $(function() {
 		if (typeof google === 'object' && typeof google.maps === 'object')
 			window.map.panTo({ lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) });
 	}, function () { });
+
 	$('.btn_close').click(function(event) { 
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
-		$('.btn_close').addClass("d-flex").removeClass("d-none");
+		let formData = new FormData();
+		formData.append('id', index);
+		$.ajax({
+			type: "POST",
+			url: window.location.href + '/remove',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function (data) {
+				location.reload();
+			},
+			error: function (data) {
+				console.log('error:');
+				console.log(data);
+				alert(error);
+			}
+		});
 	});
 
 	$('.btn_edit').click(function(e) { 

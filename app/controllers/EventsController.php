@@ -102,7 +102,7 @@ class EventsController extends Controller {
 		}
 		try {
 			$event = Event::findOrFail($_POST['id']);
-			echo '{ "event": '; print_r($event); echo ' }';
+			echo '{ "event": '; print_r($event->toJson()); echo ' }';
 			$event->delete();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			$errors['id'] = "id not exist";
