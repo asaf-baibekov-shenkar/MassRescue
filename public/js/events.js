@@ -74,21 +74,23 @@ $(function() {
 		$('.btn_close').addClass("d-flex").removeClass("d-none");
 	});
 
-	$('.btn_edit').click(function(event) { 
-		event.stopPropagation();
+	$('.btn_edit').click(function(e) { 
+		e.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
-		let eventName = events[index - 1].title;
-		let eventDescription = events[index - 1].subtitle;
+		let event = events.filter(event => event.event_id == index)[0]
+		let eventName = event.title;
+		let eventDescription = event.subtitle;
 		
 		let eventType = (() => {
-			switch (events[index - 1].type) {
+			switch (event.type) {
 				case "earthquake": return 1;
 				case "fire": return 2;
 				default: return 0;
 			}
 		})();
-		let latitude = events[index - 1].latitude
-		let longitude = events[index - 1].longitude
+
+		let latitude = event.latitude
+		let longitude = event.longitude
 		showModal(index, eventName, eventDescription, eventType, latitude, longitude);
 	});
 });
