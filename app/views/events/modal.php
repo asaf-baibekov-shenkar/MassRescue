@@ -29,8 +29,16 @@
 							<label class="btn btn-outline-primary" for="other_checkbox">Other</label>
 						</div>
 					</div>
+
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Event Location:</span>
+						<input type="text" class="form-control" id="InputAddress" name="">
+					</div>
+
 					<div id="map_form" class="w-100" style="height: 300px"></div>
 					<input type="hidden" name="id" value="">
+					<input type="hidden" name="latitude" value="">
+					<input type="hidden" name="longitude" value="">
 				</div>
 				<div class="modal-footer justify-content-evenly">
 					<button type="button" class="col-3 btn btn-danger" data-bs-dismiss="modal">Close</button>

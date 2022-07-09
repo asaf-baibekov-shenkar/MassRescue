@@ -26,6 +26,28 @@ window.initMap = () => {
 		zoom: 10,
 	});
 	window.formMapMarkers = [];
+	let mapFormAutocompleteElement = document.getElementById("InputAddress");
+	console.log(mapFormAutocompleteElement);
+	window.searchBox = new google.maps.places.SearchBox(mapFormAutocompleteElement);
+	window.searchBox.addListener("places_changed", () => {
+		const places = window.searchBox.getPlaces();
+		if (places.length == 0) return;
+		window.formMapMarkers.forEach((marker) => { marker.setMap(null); });
+		window.formMapMarkers = [];
+		const bounds = new google.maps.LatLngBounds();
+		places.forEach((place) => {
+			if (!place.geometry || !place.geometry.location) {
+				console.log("Returned place contains no geometry");
+				return;
+			}
+			window.formMapMarkers.push( new google.maps.Marker({ map: map_form, title: place.name, position: place.geometry.location }) );
+			if (place.geometry.viewport)
+				bounds.union(place.geometry.viewport);
+			else
+				bounds.extend(place.geometry.location);
+		});
+		map_form.fitBounds(bounds);
+	});	
 };
 
 $(function() {
@@ -57,6 +79,11 @@ $(function() {
 	$('#form-create-event').submit(function(event) {
 		event.preventDefault();
 		let index = parseInt($(this).parent().attr('index'));
+		if (window.formMapMarkers.length > 0) {
+			let marker = window.formMapMarkers[0]
+			$(`input[name="latitude"]`).val(marker.position.lat);
+			$(`input[name="longitude"]`).val(marker.position.lng);
+		}
 		console.log($("#form-create-event").serializeArray());
 		$.ajax({
 			type: "POST",
