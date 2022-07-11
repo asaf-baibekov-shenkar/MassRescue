@@ -33,4 +33,10 @@ $(function() {
 		})
 		$('#event-modal').modal('show');
 	});
+	$('.cell').hover(function () {
+		let index = $(this).attr('index');
+		let force = forces.filter(force => force.force_id == index)[0]
+		if (typeof google === 'object' && typeof google.maps === 'object')
+			window.map.panTo({ lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) });
+	}, function () { });
 });
