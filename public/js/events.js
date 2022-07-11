@@ -29,7 +29,6 @@ window.initMap = () => {
 	});
 	window.formMapMarkers = [];
 	let mapFormAutocompleteElement = document.getElementById("InputAddress");
-	console.log(mapFormAutocompleteElement);
 	window.searchBox = new google.maps.places.SearchBox(mapFormAutocompleteElement);
 	window.searchBox.addListener("places_changed", () => {
 		const places = window.searchBox.getPlaces();
