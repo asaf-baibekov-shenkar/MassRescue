@@ -7,7 +7,7 @@ window.initMap = () => {
 			lat: parseFloat(event.latitude),
 			lng: parseFloat(event.longitude)
 		},
-		zoom: event == null ? 26 : 14,
+		zoom: event[0] == null ? 8 : 14,
 	});
 	window.mainMapMarkers = events.map(event => {
 		return new google.maps.Marker({
@@ -22,8 +22,8 @@ window.initMap = () => {
 	let mapFormElement = document.getElementById("map_form");
 	window.map_form = new google.maps.Map(mapFormElement, {
 		center: {
-			lat: parseFloat(events[0].latitude),
-			lng: parseFloat(events[0].longitude)
+			lat: parseFloat(event.latitude),
+			lng: parseFloat(event.longitude)
 		},
 		zoom: 10,
 	});
