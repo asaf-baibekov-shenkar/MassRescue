@@ -21,6 +21,10 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
+	<script>
+		let event = <?php print_r(json_encode(json_decode($data['event'], true)["event"])) ?>;
+		let forces = <?php print_r(json_encode(json_decode($data['forces'], true)["forces"])) ?>;
+	</script>
 </head>
 
 <body>

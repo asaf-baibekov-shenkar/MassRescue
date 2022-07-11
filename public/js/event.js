@@ -1,12 +1,22 @@
 window.initMap = () => {
-	let AzrieliLocation = { lat: 32.07458646100024, lng: 34.79189151265392 }
-	let map = new google.maps.Map(document.getElementById("map"), {
-		center: AzrieliLocation,
-		zoom: 16,
+	let mapElement = document.getElementById("map");
+
+	let first_force = forces[0] || { latitude: event.latitude, longitude: event.longitude }
+	window.map = new google.maps.Map(mapElement, {
+		center: {
+			lat: parseFloat((first_force).latitude),
+			lng: parseFloat((first_force).longitude)
+		},
+		zoom: first_force == null ? 26 : 14,
 	});
-	const marker = new google.maps.Marker({
-		position: AzrieliLocation,
-		map: map,
+	window.mainMapMarkers = forces.map(force => {
+		return new google.maps.Marker({
+			position: {
+				lat: parseFloat(force.latitude),
+				lng: parseFloat(force.longitude)
+			},
+			map: window.map,
+	});
 	});
 };
 
