@@ -11,7 +11,7 @@
 		}
 	})($object["type"])
 ?>
-<div index="<?php echo $object["event_id"]; ?>" class="cell shadow-lg d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">
+<div index="<?php echo $object["force_id"]; ?>" class="cell shadow-lg d-flex align-items-center justify-content-between bg-light p-3 border-bottom border-dark">
 	<div class="d-flex align-items-center">
 		<img src="<?php echo $type_svg; ?>" alt="" width="60px" height="60px">
 		<div class="h-100 d-flex flex-column justify-content-center ms-3">
