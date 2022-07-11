@@ -4,8 +4,8 @@ window.initMap = () => {
 	let first_force = forces[0] || { latitude: event.latitude, longitude: event.longitude }
 	window.map = new google.maps.Map(mapElement, {
 		center: {
-			lat: parseFloat((first_force).latitude),
-			lng: parseFloat((first_force).longitude)
+			lat: parseFloat(first_force.latitude),
+			lng: parseFloat(first_force.longitude)
 		},
 		zoom: forces[0] == null ? 11 : 14,
 	});
