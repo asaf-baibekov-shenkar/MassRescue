@@ -1,11 +1,13 @@
 window.initMap = () => {
+	let event = events[0] || { latitude: 31.734394, longitude: 35.204517 }
+	
 	let mapElement = document.getElementById("map");
 	window.map = new google.maps.Map(mapElement, {
 		center: {
-			lat: parseFloat(events[0].latitude),
-			lng: parseFloat(events[0].longitude)
+			lat: parseFloat(event.latitude),
+			lng: parseFloat(event.longitude)
 		},
-		zoom: 9,
+		zoom: event == null ? 26 : 14,
 	});
 	window.mainMapMarkers = events.map(event => {
 		return new google.maps.Marker({
