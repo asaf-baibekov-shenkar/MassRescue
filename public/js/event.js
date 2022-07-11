@@ -7,7 +7,7 @@ window.initMap = () => {
 			lat: parseFloat((first_force).latitude),
 			lng: parseFloat((first_force).longitude)
 		},
-		zoom: first_force == null ? 26 : 14,
+		zoom: forces[0] == null ? 11 : 14,
 	});
 	window.mainMapMarkers = forces.map(force => {
 		return new google.maps.Marker({
