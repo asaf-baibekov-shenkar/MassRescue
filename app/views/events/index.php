@@ -24,6 +24,9 @@
 			z-index: 2000 !important;
 		}
 	</style>
+	<script>
+		window.events = <?php print_r(json_encode(json_decode($data['events'], true)["events"])) ?>;
+	</script>
 	<!-- google maps api -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU6K6LHaENovtEo203MCMtuL8Q_XeuIJE&libraries=places&callback=initMap"></script>
 </head>

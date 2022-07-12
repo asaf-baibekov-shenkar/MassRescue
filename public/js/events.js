@@ -1,5 +1,5 @@
 window.initMap = () => {
-	let event = { latitude: 31.734394, longitude: 35.204517 }
+	let event = events[0] || { latitude: 31.734394, longitude: 35.204517 }
 	
 	let mapElement = document.getElementById("map");
 	window.map = new google.maps.Map(mapElement, {
@@ -9,6 +9,15 @@ window.initMap = () => {
 		},
 		zoom: event[0] == null ? 8 : 14,
 		mapTypeId: google.maps.MapTypeId.HYBRID
+	});
+	window.mainMapMarkers = events.map(event => {
+		return new google.maps.Marker({
+			position: {
+				lat: parseFloat(event.latitude),
+				lng: parseFloat(event.longitude)
+			},
+			map: window.map,
+		});
 	});
 
 	window.mainMapMarkers = [];
@@ -85,8 +94,7 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 
 $(function() {
 
-	window.events = [];
-	fetchEvents(crudEnum.read);
+	presentEvents($('#list'), crudEnum.read, window.events, window.map, window.mainMapMarkers);
 
 	$('input[name="daterange"]').daterangepicker({ opens: 'center', locale: { format: 'DD/MM/YYYY' } });
 
@@ -134,26 +142,22 @@ function fetchEvents(crud_state) {
 	return fetch(window.location.href + '/eventsList')
 		.then(response => response.text())
 		.then(data => {
-			$('#list').html('');
-			window.mainMapMarkers.forEach(marker => { marker.setMap(null); })
-			window.mainMapMarkers = [];
 			window.events = JSON.parse(data).events;
-			window.events
-				.map(event => new EventsCell(event, crud_state).generateCell())
-				.forEach(cell => { $('#list').append(cell); })
-
-			window.mainMapMarkers = window.events.map(event => {
-				return new google.maps.Marker({
-					position: {
-						lat: parseFloat(event.latitude),
-						lng: parseFloat(event.longitude)
-					},
-					map: window.map,
-				});
-			});
+			presentEvents($('#list'), crud_state, window.events, window.map, window.mainMapMarkers);
 			$('#event-modal').modal('hide');
 		})
- }
+}
+
+function presentEvents(list, crud_state, events, map, markers) {
+	list.html('');
+	markers.forEach(marker => { marker.setMap(null); })
+	markers = [];
+	events
+		.map(event => new EventsCell(event, crud_state).generateCell())
+		.forEach(cell => { $('#list').append(cell); });
+	markers = events
+		.map(event => new google.maps.Marker({ position: { lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) }, map: map }));
+}
 
 function formToFormData(formElement) {
 	const data = new URLSearchParams();

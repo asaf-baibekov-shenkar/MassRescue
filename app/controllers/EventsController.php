@@ -7,7 +7,8 @@ class EventsController extends Controller {
 			'css' => CSS_PATH . 'events.css',
 			'js' => JS_PATH . 'events.js',
 			'events-cell-js' => JS_PATH . 'event_cell.js',
-			'consts-js' => JS_PATH . 'consts.js'
+			'consts-js' => JS_PATH . 'consts.js',
+			'events' => '{ "events": ' . Event::all()->toJson() . ' }'
 		]);
 	}
 
