@@ -1,4 +1,4 @@
-class EventsCell {
+class EventCell {
 	constructor(event, crud_state) {
 		this.event = event;
 		this.crud_state = crud_state

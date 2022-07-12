@@ -143,7 +143,7 @@ function presentEvents(list, crud_state, events, map, markers) {
 	markers.forEach(marker => { marker.setMap(null); })
 	markers = [];
 	events
-		.map(event => new EventsCell(event, crud_state).generateCell())
+		.map(event => new EventCell(event, crud_state).generateCell())
 		.forEach(cell => { $('#list').append(cell); });
 	markers = events
 		.map(event => new google.maps.Marker({ position: { lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) }, map: map }));
