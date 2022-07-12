@@ -1,5 +1,5 @@
 window.initMap = () => {
-	let event = events[0] || { latitude: 31.734394, longitude: 35.204517 }
+	let event = { latitude: 31.734394, longitude: 35.204517 }
 	
 	let mapElement = document.getElementById("map");
 	window.map = new google.maps.Map(mapElement, {
@@ -10,15 +10,8 @@ window.initMap = () => {
 		zoom: event[0] == null ? 8 : 14,
 		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
-	window.mainMapMarkers = events.map(event => {
-		return new google.maps.Marker({
-			position: {
-				lat: parseFloat(event.latitude),
-				lng: parseFloat(event.longitude)
-			},
-			map: window.map,
-		});
-	});
+
+	window.mainMapMarkers = [];
 
 	let mapFormElement = document.getElementById("map_form");
 	window.map_form = new google.maps.Map(mapFormElement, {
@@ -52,7 +45,49 @@ window.initMap = () => {
 	});	
 };
 
+$(document).on('DOMNodeInserted', '.cell', function () {
+	$(this).click(function() {
+		let index = $(this).attr('index');
+		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
+		return false;
+	});
+
+	$(this).hover(function () {
+		let index = $(this).attr('index');
+		let event = window.events.filter(event => event.event_id == index)[0]
+		if (typeof google === 'object' && typeof google.maps === 'object')
+			window.map.panTo({ lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) });
+	}, function () { });
+
+	$('.btn_edit').click(function(e) { 
+		e.stopPropagation();
+		let index = $(this).parent().parent().attr('index');
+		let event = events.filter(event => event.event_id == index)[0]
+		let eventName = event.title;
+		let eventDescription = event.subtitle;
+		let eventType = event.type;
+		let latitude = event.latitude
+		let longitude = event.longitude
+		showModal(index, eventName, eventDescription, eventType, latitude, longitude);
+	});
+
+	$('.btn_close').click(function(event) { 
+		event.stopPropagation();
+		let index = $(this).parent().parent().attr('index');
+		let formData = new FormData();
+		formData.append('id', index);
+		fetch(window.location.href + '/remove', { method: 'POST', body: formData })
+			.then(() => fetchEvents(crudEnum.delete))
+			.catch(error => console.log("error: ", error))
+	});
+});
+
+
 $(function() {
+
+	window.events = [];
+	fetchEvents(crudEnum.read);
+
 	$('input[name="daterange"]').daterangepicker({ opens: 'center', locale: { format: 'DD/MM/YYYY' } });
 
 	$('#btn_create').click(event => {
@@ -87,66 +122,45 @@ $(function() {
 			$(`input[name="longitude"]`).val(marker.position.lng);
 		}
 		console.log($("#form-create-event").serializeArray());
-		$.ajax({
-			type: "POST",
-			url: window.location.href + (index <= 0 ? '/create' : '/update'),
-			data: $("#form-create-event").serializeArray(),
-			success: function (data) {
-				location.reload()
-			},
-			error: function (data) {
-				alert("error");
-			}
-		});
+		const data = formToFormData(document.getElementById('form-create-event'));
+		fetch(window.location.href + (index <= 0 ? '/create' : '/update'), { method: 'POST', body: data })
+			.then(() => fetchEvents((index <= 0 ? crudEnum.create : crudEnum.update)))
+			.catch(error => console.log("error: ", error))
 	})
-	$('.cell').click(function() {
-		let index = $(this).attr('index');
-		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
-		return false;
-	});
 
-	$('.cell').hover(function () {
-		let index = $(this).attr('index');
-		let event = events.filter(event => event.event_id == index)[0]
-		if (typeof google === 'object' && typeof google.maps === 'object')
-			window.map.panTo({ lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) });
-	}, function () { });
-
-	$('.btn_close').click(function(event) { 
-		event.stopPropagation();
-		let index = $(this).parent().parent().attr('index');
-		let formData = new FormData();
-		formData.append('id', index);
-		$.ajax({
-			type: "POST",
-			url: window.location.href + '/remove',
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				location.reload();
-			},
-			error: function (data) {
-				console.log('error:');
-				console.log(data);
-			}
-		});
-	});
-
-	$('.btn_edit').click(function(e) { 
-		e.stopPropagation();
-		let index = $(this).parent().parent().attr('index');
-		let event = events.filter(event => event.event_id == index)[0]
-		let eventName = event.title;
-		let eventDescription = event.subtitle;
-		let eventType = event.type;
-		let latitude = event.latitude
-		let longitude = event.longitude
-		showModal(index, eventName, eventDescription, eventType, latitude, longitude);
-	});
 });
 
+function fetchEvents(crud_state) { 
+	return fetch(window.location.href + '/eventsList')
+		.then(response => response.text())
+		.then(data => {
+			$('#list').html('');
+			window.mainMapMarkers.forEach(marker => { marker.setMap(null); })
+			window.mainMapMarkers = [];
+			window.events = JSON.parse(data).events;
+			window.events
+				.map(event => new EventsCell(event, crud_state).generateCell())
+				.forEach(cell => { $('#list').append(cell); })
 
+			window.mainMapMarkers = window.events.map(event => {
+				return new google.maps.Marker({
+					position: {
+						lat: parseFloat(event.latitude),
+						lng: parseFloat(event.longitude)
+					},
+					map: window.map,
+				});
+			});
+			$('#event-modal').modal('hide');
+		})
+ }
+
+function formToFormData(formElement) {
+	const data = new URLSearchParams();
+	for (const pair of new FormData(formElement))
+		data.append(pair[0], pair[1]);
+	return data;
+}
 
 function showModal(index, eventName, eventDescription, eventType, latitude, longitude) {
 	$('#event-modal').attr('index', index);
@@ -155,6 +169,7 @@ function showModal(index, eventName, eventDescription, eventType, latitude, long
 		$(`input[name="id"]`).val(index);
 		$('#InputEventName').val(index <= 0 ? "" : eventName);
 		$('#InputDescription').val(index <= 0 ? "" : eventDescription);
+		$('#InputAddress').val(index <= 0 ? "" : `${parseFloat(latitude).toFixed(5)}, ${parseFloat(longitude).toFixed(5)}`);
 		$(`input[name="type"][value="${index <= 0 ? "" : eventType}"]`).prop('checked', true);
 
 		if (typeof google === 'object' && typeof google.maps === 'object') {
@@ -165,6 +180,7 @@ function showModal(index, eventName, eventDescription, eventType, latitude, long
 					map: window.map_form,
 				}));
 				window.map_form.setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
+				window.map_form.setZoom(10);
 			} else {
 				window.map_form.setCenter({ lat: 31.734394, lng: 35.204517 })
 				window.map_form.setZoom(6);

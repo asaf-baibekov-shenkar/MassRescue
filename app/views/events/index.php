@@ -16,10 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
+	<script type="text/javascript" src="<?= $data['consts-js'] ?>"></script>
+	<script type="text/javascript" src="<?= $data['events-cell-js'] ?>"></script>
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
-	<script>
-		let events = <?php print_r(json_encode(json_decode($data['events'], true)["events"])) ?>;
-	</script>
 	<style>
 		.pac-container {
 			z-index: 2000 !important;
@@ -122,7 +121,6 @@
 					</div>
 				</div>
 				<div id="list" class="overflow-auto flex-grow-1">
-					<?php include 'event_cell.php'; ?>
 				</div>
 			</div>
 			<div class="col col-lg-6 h-100 p-0">
