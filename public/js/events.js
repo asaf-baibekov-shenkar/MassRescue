@@ -10,16 +10,6 @@ window.initMap = () => {
 		zoom: event[0] == null ? 8 : 14,
 		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
-	window.mainMapMarkers = events.map(event => {
-		return new google.maps.Marker({
-			position: {
-				lat: parseFloat(event.latitude),
-				lng: parseFloat(event.longitude)
-			},
-			map: window.map,
-		});
-	});
-
 	window.mainMapMarkers = [];
 
 	let mapFormElement = document.getElementById("map_form");
