@@ -25,7 +25,7 @@
 							<input type="radio" class="btn-check" name="type" id="earthquake_checkbox" value="earthquake" required>
 							<label class="btn btn-outline-primary" for="earthquake_checkbox">Earthquake</label>
 							
-							<input type="radio" class="btn-check" name="type" id="other_checkbox" value="" required checked>
+							<input type="radio" class="btn-check" name="type" id="other_checkbox" value="unknown" required checked>
 							<label class="btn btn-outline-primary" for="other_checkbox">Other</label>
 						</div>
 					</div>
