@@ -51,7 +51,9 @@ window.initMap = () => {
 				bounds.extend(place.geometry.location);
 		});
 		map_form.fitBounds(bounds);
-	});	
+	});
+
+	presentEvents($('#list'), crudEnum.read, window.events, window.map, window.mainMapMarkers);
 };
 
 $(document).on('DOMNodeInserted', '.cell', function () {
@@ -93,8 +95,6 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 
 
 $(function() {
-
-	presentEvents($('#list'), crudEnum.read, window.events, window.map, window.mainMapMarkers);
 
 	$('input[name="daterange"]').daterangepicker({ opens: 'center', locale: { format: 'DD/MM/YYYY' } });
 
