@@ -1,7 +1,7 @@
 window.initMap = () => {
-	let mapElement = document.getElementById("map");
-
 	let first_force = forces[0] || { latitude: event.latitude, longitude: event.longitude }
+	
+	let mapElement = document.getElementById("map");
 	window.map = new google.maps.Map(mapElement, {
 		center: {
 			lat: parseFloat(first_force.latitude),
@@ -10,15 +10,7 @@ window.initMap = () => {
 		zoom: forces[0] == null ? 11 : 14,
 		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
-	window.mainMapMarkers = forces.map(force => {
-		return new google.maps.Marker({
-			position: {
-				lat: parseFloat(force.latitude),
-				lng: parseFloat(force.longitude)
-			},
-			map: window.map,
-		});
-	});
+	window.mainMapMarkers = [];
 
 	let mapFormElement = document.getElementById("map_form");
 	window.map_form = new google.maps.Map(mapFormElement, {
@@ -28,7 +20,6 @@ window.initMap = () => {
 		},
 		zoom: 14
 	});
-
 	window.formMapMarkers = [];
 	window.map_form.addListener("click", (mapsMouseEvent) => {
 		window.formMapMarkers.map(marker => { marker.setMap(null) });
@@ -37,7 +28,6 @@ window.initMap = () => {
 		window.formMapMarkers.push( new google.maps.Marker({ map: map_form, position: clickedLocation }) );
 		document.getElementById("InputAddress").value = `${clickedLocation.lat.toFixed(5)}, ${clickedLocation.lng.toFixed(5)}`;
 	});
-
 	let mapFormAutocompleteElement = document.getElementById("InputAddress");
 	window.searchBox = new google.maps.places.SearchBox(mapFormAutocompleteElement);
 	window.searchBox.addListener("places_changed", () => {
@@ -59,6 +49,8 @@ window.initMap = () => {
 		});
 		map_form.fitBounds(bounds);
 	});
+
+	presentForces($('#list'), crudEnum.read, window.event, window.forces, window.map, window.mainMapMarkers);
 };
 
 $(function() {
@@ -95,6 +87,17 @@ $(function() {
 		});
 	})
 });
+
+function presentForces(list, crud_state, event, forces, map, markers) {
+	list.html('');
+	markers.forEach(marker => { marker.setMap(null); })
+	markers = [];
+	forces
+		.map(force => new ForceCell(force, crud_state).generateCell())
+		.forEach(cell => { $('#list').append(cell); });
+	markers = forces
+		.map(force => new google.maps.Marker({ position: { lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) }, map: map }));
+}
 
 function showModal(event_id, type, latitude, longitude) {
 	$('#event-modal').on('show.bs.modal', () => {

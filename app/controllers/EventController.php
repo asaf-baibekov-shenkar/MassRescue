@@ -11,6 +11,8 @@ class EventController extends Controller {
 			$this->view('event/index', [
 			    'css' => CSS_PATH . 'event.css',
 			    'js' => JS_PATH . 'event.js',
+				'force-cell-js' => JS_PATH . 'force_cell.js',
+				'consts-js' => JS_PATH . 'consts.js',
 			    'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
 				'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }'
 			]);

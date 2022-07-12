@@ -18,9 +18,11 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
+	<script type="text/javascript" src="<?= $data['force-cell-js'] ?>"></script>
+	<script type="text/javascript" src="<?= $data['consts-js'] ?>"></script>
 	<script>
-		let event = <?php print_r(json_encode(json_decode($data['event'], true)["event"])) ?>;
-		let forces = <?php print_r(json_encode(json_decode($data['forces'], true)["forces"])) ?>;
+		window.event = <?php print_r(json_encode(json_decode($data['event'], true)["event"])) ?>;
+		window.forces = <?php print_r(json_encode(json_decode($data['forces'], true)["forces"])) ?>;
 	</script>
 	<style>
 		.pac-container {
@@ -116,7 +118,6 @@
 					</div>
 				</div>
 				<div id="list" class="overflow-auto flex-grow-1">
-					<?php include 'force_cell.php'; ?>
 				</div>
 			</div>
 			<div class="col col-lg-6 h-100 p-0">
