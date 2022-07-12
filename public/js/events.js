@@ -8,6 +8,7 @@ window.initMap = () => {
 			lng: parseFloat(event.longitude)
 		},
 		zoom: event[0] == null ? 8 : 14,
+		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
 	window.mainMapMarkers = events.map(event => {
 		return new google.maps.Marker({

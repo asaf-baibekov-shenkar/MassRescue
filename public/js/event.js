@@ -8,6 +8,7 @@ window.initMap = () => {
 			lng: parseFloat(first_force.longitude)
 		},
 		zoom: forces[0] == null ? 11 : 14,
+		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
 	window.mainMapMarkers = forces.map(force => {
 		return new google.maps.Marker({
