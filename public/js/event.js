@@ -83,9 +83,10 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 		event.stopPropagation();
 		let index = $(this).parent().parent().attr('index');
 		let formData = new FormData();
-		formData.append('id', index);
-		fetch(window.location.href + '/remove', { method: 'POST', body: formData })
-			.then(() => fetchEvents(crudEnum.delete))
+		formData.append('event_id', window.event.event_id);
+		formData.append('force_id', index);
+		fetch(window.location.href.split('?')[0] + '/removeForce', { method: 'POST', body: formData })
+			.then(() => fetchForces(crudEnum.delete))
 			.catch(error => console.log("error: ", error))
 	});
 });
