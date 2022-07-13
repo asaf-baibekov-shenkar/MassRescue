@@ -116,8 +116,8 @@ $(function() {
 		let index = parseInt($(this).parent().attr('index'));
 		if (window.formMapMarkers.length > 0) {
 			let marker = window.formMapMarkers[0]
-			$(`input[name="latitude"]`).val(marker.position.lat);
-			$(`input[name="longitude"]`).val(marker.position.lng);
+			$(`input[name="latitude"]`).val(marker.position.lat());
+			$(`input[name="longitude"]`).val(marker.position.lng());
 		}
 		console.log($("#form-create-event").serializeArray());
 		const data = formToFormData(document.getElementById('form-create-event'));
