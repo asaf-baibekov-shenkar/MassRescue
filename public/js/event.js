@@ -7,7 +7,7 @@ window.initMap = () => {
 			lat: parseFloat(first_force.latitude),
 			lng: parseFloat(first_force.longitude)
 		},
-		zoom: forces[0] == null ? 11 : 14,
+		zoom: forces[0] == null ? 11 : 15,
 		mapTypeId: google.maps.MapTypeId.HYBRID
 	});
 	window.mainMapMarkers = [];
@@ -50,67 +50,117 @@ window.initMap = () => {
 		map_form.fitBounds(bounds);
 	});
 
-	presentForces($('#list'), crudEnum.read, window.event, window.forces, window.map, window.mainMapMarkers);
+	presentForces($('#list'), crudEnum.read, window.event, window.forces, window.map);
 };
+
+$(document).on('DOMNodeInserted', '.cell', function () {
+	$(this).click(function() {
+		let index = $(this).attr('index');
+		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
+		return false;
+	});
+
+	$(this).hover(function () {
+		let index = $(this).attr('index');
+		let force = window.forces.filter(force => force.force_id == index)[0]
+		if (typeof google === 'object' && typeof google.maps === 'object')
+			window.map.panTo({ lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) });
+	}, function () { });
+
+	$('.btn_edit').click(function(e) { 
+		e.stopPropagation();
+		let index = $(this).parent().parent().attr('index');
+		let force = forces.filter(force => force.force_id == index)[0]
+		let forceName = force.title;
+		let forceDescription = force.subtitle;
+		let forceType = force.type;
+		let latitude = force.latitude
+		let longitude = force.longitude
+		showModal(window.event.event_id, force.force_id, forceType, forceName, forceDescription, latitude, longitude);
+	});
+
+	$('.btn_close').click(function(event) { 
+		event.stopPropagation();
+		let index = $(this).parent().parent().attr('index');
+		let formData = new FormData();
+		formData.append('id', index);
+		fetch(window.location.href + '/remove', { method: 'POST', body: formData })
+			.then(() => fetchEvents(crudEnum.delete))
+			.catch(error => console.log("error: ", error))
+	});
+});
 
 $(function() {
 	$('#filter .btn').click(function(e) {
 		let type = $(this).attr("id").substring(4);
 		let latitude = event.latitude
 		let longitude = event.longitude
-		showModal(event.event_id, type, latitude, longitude)
+		showModal(window.event.event_id, -1, type, latitude, longitude)
 	});
-	$('.cell').hover(function () {
-		let index = $(this).attr('index');
-		let force = forces.filter(force => force.force_id == index)[0]
-		if (typeof google === 'object' && typeof google.maps === 'object')
-			window.map.panTo({ lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) });
-	}, function () { });
 	$('#form-create-force').submit(function(e) {
 		e.preventDefault();
+		let index = parseInt($(this).parent().attr('index'));
 		if (window.formMapMarkers.length > 0) {
 			let marker = window.formMapMarkers[0]
-			$(`input[name="latitude"]`).val(marker.position.lat);
-			$(`input[name="longitude"]`).val(marker.position.lng);
+			$(`input[name="latitude"]`).val(marker.position.lat());
+			$(`input[name="longitude"]`).val(marker.position.lng());
 		}
 		console.log($("#form-create-force").serializeArray());
-		$.ajax({
-			type: "POST",
-			url: window.location.href.split('?')[0] + '/create',
-			data: $("#form-create-force").serializeArray(),
-			success: function (data) {
-				location.reload()
-			},
-			error: function (data) {
-				alert("error");
-			}
-		});
+		const data = formToFormData(document.getElementById('form-create-force'));
+		fetch(window.location.href.split('?')[0] + (index <= 0 ? '/create' : '/updateForce'), { method: 'POST', body: data })
+			.then(() => fetchForces((index <= 0 ? crudEnum.create : crudEnum.update)))
+			.catch(error => console.log("error: ", error))
 	})
 });
 
-function presentForces(list, crud_state, event, forces, map, markers) {
+function fetchForces(crud_state) { 
+	return fetch(window.location.href.split('?')[0] + '/forcesList' + '?event_id=' + window.event.event_id)
+		.then(response => response.text())
+		.then(data => {
+			window.forces = JSON.parse(data).forces;
+			presentForces($('#list'), crud_state, window.event, window.forces, window.map);
+			$('#event-modal').modal('hide');
+		})
+}
+
+function presentForces(list, crud_state, event, forces) {
 	list.html('');
-	markers.forEach(marker => { marker.setMap(null); })
-	markers = [];
+	window.mainMapMarkers.forEach(marker => { marker.setMap(null); })
+	window.mainMapMarkers = [];
 	forces
 		.map(force => new ForceCell(force, crud_state).generateCell())
 		.forEach(cell => { $('#list').append(cell); });
-	markers = forces
-		.map(force => new google.maps.Marker({ position: { lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) }, map: map }));
+	window.mainMapMarkers = forces
+		.map(force => new google.maps.Marker({ position: { lat: parseFloat(force.latitude), lng: parseFloat(force.longitude) }, map: window.map }));
 }
 
-function showModal(event_id, type, latitude, longitude) {
+function formToFormData(formElement) {
+	const data = new URLSearchParams();
+	for (const pair of new FormData(formElement))
+		data.append(pair[0], pair[1]);
+	return data;
+}
+
+function showModal(event_id, force_id, type, forceName, forceDescription, latitude, longitude) {
 	$('#event-modal').on('show.bs.modal', () => {
 		$('#event-modal-title').html(`Add ${type.charAt(0).toUpperCase() + type.slice(1)}`);
 		$(`input[name="event_id"]`).val(event_id);
-		$(`input[name="type"]`).val(type);
-		$('#InputEventName').val('');
-		$('#InputDescription').val('');
+		$(`input[name="force_id"]`).val(force_id);
+		$('#InputForceName').val(force_id <= 0 ? "" : forceName);
+		$('#InputDescription').val(force_id <= 0 ? "" : forceDescription);
 		$('#create_btn').html("Submit");
 		if (typeof google === 'object' && typeof google.maps === 'object') {
 			window.formMapMarkers.forEach(marker => { marker.setMap(null); });
-			window.map_form.setZoom(12)
-			window.map_form.setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
+			if (force_id > 0) {
+				window.formMapMarkers.push(new google.maps.Marker({
+					position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+					map: window.map_form,
+				}));
+				window.map_form.setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
+			} else {
+				window.map_form.setCenter({ lat: window.event.latitude, lng: window.event.longitude })
+			}
+			window.map_form.setZoom(14);
 		}
 	})
 	$('#event-modal').modal('show');

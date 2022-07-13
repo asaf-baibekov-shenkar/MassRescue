@@ -43,7 +43,7 @@ window.initMap = () => {
 		map_form.fitBounds(bounds);
 	});
 
-	presentEvents($('#list'), crudEnum.read, window.events, window.map, window.mainMapMarkers);
+	presentEvents($('#list'), crudEnum.read, window.events);
 };
 
 $(document).on('DOMNodeInserted', '.cell', function () {
@@ -133,20 +133,20 @@ function fetchEvents(crud_state) {
 		.then(response => response.text())
 		.then(data => {
 			window.events = JSON.parse(data).events;
-			presentEvents($('#list'), crud_state, window.events, window.map, window.mainMapMarkers);
+			presentEvents($('#list'), crud_state, window.events, window.map);
 			$('#event-modal').modal('hide');
 		})
 }
 
-function presentEvents(list, crud_state, events, map, markers) {
+function presentEvents(list, crud_state, events) {
 	list.html('');
-	markers.forEach(marker => { marker.setMap(null); })
-	markers = [];
+	window.mainMapMarkers.forEach(marker => { marker.setMap(null); })
+	window.mainMapMarkers = [];
 	events
 		.map(event => new EventCell(event, crud_state).generateCell())
 		.forEach(cell => { $('#list').append(cell); });
-	markers = events
-		.map(event => new google.maps.Marker({ position: { lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) }, map: map }));
+	window.mainMapMarkers = events
+		.map(event => new google.maps.Marker({ position: { lat: parseFloat(event.latitude), lng: parseFloat(event.longitude) }, map: window.map }));
 }
 
 function formToFormData(formElement) {

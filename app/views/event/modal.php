@@ -8,10 +8,10 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1">Force Name:</span>
-						<input type="text" class="form-control" id="InputEventName" name="title" required>
+						<input type="text" class="form-control" id="InputForceName" name="title" required>
 					</div>
 					<div class="input-group mb-3">
-						<label for="InputDescription" class="col-3 input-group-text">Message:</label>
+						<label for="InputDescription" class="col-3 input-group-text">Description:</label>
 						<div class="col-9">
 							<textarea class="form-control" id="InputDescription" name="subtitle"></textarea>
 						</div>
@@ -22,7 +22,7 @@
 					</div>
 					<div id="map_form" class="w-100" style="height: 300px"></div>
 					<input type="hidden" name="event_id" value="">
-					<input type="hidden" name="type" value="">
+					<input type="hidden" name="force_id" value="">
 					<input type="hidden" name="latitude" value="">
 					<input type="hidden" name="longitude" value="">
 				</div>
