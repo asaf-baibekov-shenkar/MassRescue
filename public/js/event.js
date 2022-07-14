@@ -37,10 +37,7 @@ window.initMap = () => {
 		window.formMapMarkers = [];
 		const bounds = new google.maps.LatLngBounds();
 		places.forEach((place) => {
-			if (!place.geometry || !place.geometry.location) {
-				console.log("Returned place contains no geometry");
-				return;
-			}
+			if (!place.geometry || !place.geometry.location) return;
 			window.formMapMarkers.push( new google.maps.Marker({ map: map_form, title: place.name, position: place.geometry.location }) );
 			if (place.geometry.viewport)
 				bounds.union(place.geometry.viewport);
@@ -110,15 +107,10 @@ $(function() {
 			$(`input[name="latitude"]`).val(marker.position.lat());
 			$(`input[name="longitude"]`).val(marker.position.lng());
 		}
-		console.log($("#form-create-force").serializeArray());
 		const data = formToFormData(document.getElementById('form-create-force'));
 		showSpinner();
 		fetch(window.location.href.split('?')[0] + (index > 0 ? '/updateForce' : '/create'), { method: 'POST', body: data })
-			.then(response => response.text())
-			.then(data => {
-				console.log(data);
-				return fetchForces(index > 0 ? crudEnum.update : crudEnum.create)
-			})
+			.then(() => fetchForces(index > 0 ? crudEnum.update : crudEnum.create))
 			.catch(error => console.log("error: ", error))
 			.finally(() => { hideSpinner() })
 	})

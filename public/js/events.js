@@ -30,10 +30,7 @@ window.initMap = () => {
 		window.formMapMarkers = [];
 		const bounds = new google.maps.LatLngBounds();
 		places.forEach((place) => {
-			if (!place.geometry || !place.geometry.location) {
-				console.log("Returned place contains no geometry");
-				return;
-			}
+			if (!place.geometry || !place.geometry.location) return;
 			window.formMapMarkers.push( new google.maps.Marker({ map: map_form, title: place.name, position: place.geometry.location }) );
 			if (place.geometry.viewport)
 				bounds.union(place.geometry.viewport);
@@ -128,7 +125,6 @@ $(function() {
 			$(`input[name="latitude"]`).val(marker.position.lat());
 			$(`input[name="longitude"]`).val(marker.position.lng());
 		}
-		console.log($("#form-create-event").serializeArray());
 		const data = formToFormData(document.getElementById('form-create-event'));
 		showSpinner();
 		fetch(window.location.href + (index > 0 ? '/update' : '/create'), { method: 'POST', body: data })
