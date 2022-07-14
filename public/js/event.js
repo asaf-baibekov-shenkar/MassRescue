@@ -154,7 +154,7 @@ function showModal(event_id, force_id, type, forceName, forceDescription, latitu
 				}));
 				window.map_form.setCenter({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
 			} else {
-				window.map_form.setCenter({ lat: window.event.latitude, lng: window.event.longitude })
+				window.map_form.setCenter({ lat: parseFloat(window.event.latitude), lng: parseFloat(window.event.longitude) })
 			}
 			window.map_form.setZoom(14);
 		}
