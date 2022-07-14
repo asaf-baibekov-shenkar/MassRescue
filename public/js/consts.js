@@ -6,5 +6,6 @@ const crudEnum = Object.freeze({
 	create: 0,
 	read: 1,
 	update: 2,
-	delete: 3
+	delete: 3,
+	none: 4
 });

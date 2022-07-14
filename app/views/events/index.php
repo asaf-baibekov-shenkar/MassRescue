@@ -94,7 +94,7 @@
 				<div id="filter" class="shadow p-2">
 					<div class="d-flex flex-column flex-lg-row gap-2 gap-lg-0">
 						<div class="col-12 col-lg-3 d-flex align-items-center">
-							<input class="form-control" type="text" placeholder="Search">
+							<input id="search-event" class="form-control" type="text" placeholder="Search">
 						</div>
 						<div class="col-12 col-lg-9 d-flex align-items-center justify-content-evenly">
 							<div class="col-8 col-lg-7">

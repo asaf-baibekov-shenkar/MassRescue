@@ -97,7 +97,7 @@
 				<div id="filter" class="shadow p-2">
 					<div class="d-flex flex-column flex-lg-row gap-2 gap-lg-0">
 						<div class="col-12 col-lg-6 d-flex align-items-center">
-							<input class="form-control" type="text" placeholder="Search">
+							<input id="search-event" class="form-control" type="text" placeholder="Search">
 						</div>
 						<div class="col-12 col-lg-6 d-flex align-items-center justify-content-evenly">
 							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter" style="height: 38px; width: 38px">

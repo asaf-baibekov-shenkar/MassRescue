@@ -89,6 +89,13 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 });
 
 $(function() {
+
+	$('#search-event').on('input', function(e) {
+		let text = e.target.value;
+		let filteredForces = window.forces.filter(force => force.title.toLowerCase().includes(text.toLowerCase()))
+		presentForces($('#list'), crudEnum.none, window.event, filteredForces)
+	});
+
 	$('#filter .btn').click(function(e) {
 		let type = $(this).attr("id").substring(4);
 		let latitude = event.latitude

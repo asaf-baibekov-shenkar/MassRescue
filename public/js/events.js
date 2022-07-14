@@ -91,6 +91,12 @@ $(function() {
 
 	$('input[name="daterange"]').daterangepicker({ opens: 'center', locale: { format: 'DD/MM/YYYY' } });
 
+	$('#search-event').on('input', function(e) {
+		let text = e.target.value;
+		let filteredEvents = window.events.filter(event => event.title.toLowerCase().includes(text.toLowerCase()))
+		presentEvents($('#list'), crudEnum.none, filteredEvents, window.map);
+	});
+
 	$('#btn_create').click(event => {
 		$('#btn_edit, #btn_close').toggleClass('active', false).change();
 		showModal(-1);
