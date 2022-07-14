@@ -23,6 +23,7 @@
 					<div id="map_form" class="w-100"></div>
 					<input type="hidden" name="event_id" value="">
 					<input type="hidden" name="force_id" value="">
+					<input type="hidden" name="type" value="">
 					<input type="hidden" name="latitude" value="">
 					<input type="hidden" name="longitude" value="">
 				</div>
