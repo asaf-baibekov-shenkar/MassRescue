@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent {
+	protected $primaryKey = 'user_id';
 	public $incrementing = true;
 	public $user_id;
 	public $id_number;
