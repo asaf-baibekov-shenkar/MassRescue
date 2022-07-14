@@ -57,16 +57,16 @@
 		</div>
 		<div id="login" class="h-100">
 			<div class="d-table h-100 col-9 col-md-6 col-lg-4 mx-auto">
-				<form action="" method="POST" class="d-table-cell align-middle overflow-scroll">
+				<form action="<?php echo BASE_URL . 'home/login' ?>" method="POST" class="d-table-cell align-middle overflow-scroll">
 					<div class="d-flex flex-column align-items-center gap-2 p-5 rounded shadow-lg bg-light">
 						<h3 class="m-0">Sign In</h3>
 						<div class="input-group">
 							<label class="input-group-text bg-secondary bi bi-123 text-white" for="id_input"></label>
-							<input class="form-control" type="text" id="id_input" name="ID_Number" placeholder="Number ID" required>
+							<input class="form-control" type="text" id="id_input" name="id_number" placeholder="Number ID" required>
 						</div>
 						<div class="input-group">
 							<label class="input-group-text bg-secondary bi bi-key-fill text-white" for="password_input"></label>
-							<input class="form-control" type="password" id="password_input" name="Password" placeholder="password" required>
+							<input class="form-control" type="password" id="password_input" name="password" placeholder="password" required>
 						</div>
 						<div class="form-check m-0">
 							<label class="form-check-label" for="remember_me_check">Remember Me</label>

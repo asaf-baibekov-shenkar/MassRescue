@@ -3,13 +3,19 @@
 class EventsController extends Controller {
 
 	public function index() {
-		$this->view('events/index', [
-			'css' => CSS_PATH . 'events.css',
-			'js' => JS_PATH . 'events.js',
-			'events-cell-js' => JS_PATH . 'event_cell.js',
-			'consts-js' => JS_PATH . 'consts.js',
-			'events' => '{ "events": ' . Event::all()->toJson() . ' }'
-		]);
+		try {
+			$user = User::where(['session_id' => session_id()])->firstOrFail();
+			$this->view('events/index', [
+				'css' => CSS_PATH . 'events.css',
+				'js' => JS_PATH . 'events.js',
+				'events-cell-js' => JS_PATH . 'event_cell.js',
+				'consts-js' => JS_PATH . 'consts.js',
+				'events' => '{ "events": ' . Event::all()->toJson() . ' }',
+				'user' => '{ "user": ' . $user->toJson() . ' }'
+			]);
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			header('Location: ' . BASE_URL);
+		}
 	}
 
 	public function create() {

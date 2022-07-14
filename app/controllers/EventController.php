@@ -6,16 +6,24 @@ class EventController extends Controller {
 		$id = $_GET['id'];
 		if (!isset($id)) {
 			header('Location: ' . BASE_URL . 'events');
+			return;
 		}
 		try {
-			$this->view('event/index', [
-			    'css' => CSS_PATH . 'event.css',
-			    'js' => JS_PATH . 'event.js',
-				'force-cell-js' => JS_PATH . 'force_cell.js',
-				'consts-js' => JS_PATH . 'consts.js',
-			    'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
-				'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }'
-			]);
+			try {
+				$user = User::where(['session_id' => session_id()])->firstOrFail();
+				$this->view('event/index', [
+					'css' => CSS_PATH . 'event.css',
+					'js' => JS_PATH . 'event.js',
+					'force-cell-js' => JS_PATH . 'force_cell.js',
+					'consts-js' => JS_PATH . 'consts.js',
+					'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
+					'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }',
+					'user' => '{ "user": ' . $user->toJson() . ' }'
+				]);
+			} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+				header('Location: ' . BASE_URL);
+				return;
+			}
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			header('Location: ' . BASE_URL . 'events');
 		}
