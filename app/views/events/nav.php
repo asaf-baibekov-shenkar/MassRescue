@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark" style="padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);">
+<nav class="navbar navbar-dark bg-dark">
 	<div class="container-fluid">
 		<div class="navbar-brand d-flex align-items-center">
 			<button
@@ -15,7 +15,7 @@
 			</ol>
 		</div>
 	</div>
-	<div class="offcanvas offcanvas-start rounded-start bg-dark shadow-lg overflow-hidden" id="offcanvas-main" tabindex="-1" style="border-radius: 2.5rem; width: 350px;">
+	<div class="offcanvas offcanvas-start rounded-start bg-dark shadow-lg overflow-hidden" id="offcanvas-main" tabindex="-1">
 		<div class="offcanvas-header flex-column gap-1">
 		<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . $user["profile_image"] ?>" width="120" height="120" alt="">
 			<span class="offcanvas-title text-light fs-3 fw-bolder"><?php echo $user["first_name"] . ' ' . $user["last_name"]; ?></span>

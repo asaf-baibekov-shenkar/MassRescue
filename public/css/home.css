@@ -1,0 +1,12 @@
+main {
+    height: calc(100vh - 100px);
+    background-color: var(--bs-gray-800);
+}
+
+nav {
+    padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+}
+
+.navbar-brand span {
+    font-family: Audiowide, sans-serif;
+}

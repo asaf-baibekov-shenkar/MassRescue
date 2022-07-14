@@ -35,7 +35,7 @@
 						<input type="text" class="form-control" id="InputAddress" name="">
 					</div>
 
-					<div id="map_form" class="w-100" style="height: 300px"></div>
+					<div id="map_form" class="w-100"></div>
 					<input type="hidden" name="id" value="">
 					<input type="hidden" name="latitude" value="">
 					<input type="hidden" name="longitude" value="">

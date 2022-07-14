@@ -9,16 +9,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+	<link rel="stylesheet" type="text/css" href="<?= $data['css'] ?>" />
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
 	<title>Mass Rescue</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<div class="container-fluid">
 			<div class="navbar-brand">
 				<a class="d-flex align-items-center nav-link text-light fs-2" href="./index.html">
 					<img class="bg-white rounded-circle me-3 py-1" src="./images/logo/logo.svg" width="74" height="74" alt="">
-					<span style="font-family: Audiowide, sans-serif;">Mass Rescue</span>
+					<span>Mass Rescue</span>
 				</a>
 			</div>
 			<button
@@ -45,7 +46,7 @@
 			</div>
 		</div>
 	</nav>
-    <main class="overflow-scroll" style="height: calc(100vh - 100px); background-color: var(--bs-gray-800);">
+    <main class="overflow-scroll">
 		<div id="intro" class="h-100">
 		<div class="container h-100">
 			<div class="h-100 col-md-6 d-flex flex-column align-items-center align-items-md-start justify-content-center">

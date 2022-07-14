@@ -37,7 +37,7 @@
 
 <body>
 	<?php include 'nav.php' ?>
-	<main style="height: calc(100vh - 100px);">
+	<main>
 		<div class="row flex-column h-100 g-0">
 			<div class="col col-lg-6 h-100 p-0 order-1 order-lg-0 d-flex flex-column">
 				<div id="filter" class="shadow p-2">
@@ -46,19 +46,19 @@
 							<input id="search-event" class="form-control" type="text" placeholder="Search">
 						</div>
 						<div class="col-12 col-lg-6 d-flex align-items-center justify-content-evenly">
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter" style="height: 38px; width: 38px">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_firefighter">
 								<img src="<?php echo ICONS_PATH . 'event-forces/firefighter.png' ?>" alt="" width="24px" height="24px">
 							</a>
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_medic" style="height: 38px; width: 38px">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_medic">
 								<img src="<?php echo ICONS_PATH . 'event-forces/medic.png' ?>" alt="" width="24px" height="24px">
 							</a>
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_police" style="height: 38px; width: 38px">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_police">
 								<img src="<?php echo ICONS_PATH . 'event-forces/police.png' ?>" alt="" width="24px" height="24px">
 							</a>
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_drone" style="height: 38px; width: 38px">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_drone">
 								<img src="<?php echo ICONS_PATH . 'event-forces/drone.png' ?>" alt="" width="24px" height="24px">
 							</a>
-							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_block" style="height: 38px; width: 38px">
+							<a class="btn btn-light border border-1 border-dark p-0 d-flex justify-content-center align-items-center" id="btn_block">
 								<img src="<?php echo ICONS_PATH . 'event-forces/block.png' ?>" alt="" width="24px" height="24px">
 							</a>
 						</div>
@@ -73,8 +73,8 @@
 		</div>
 	</main>
 	<?php include 'modal.php' ?>
-	<div id="spinner-view" class="d-none justify-content-center align-items-center position-absolute top-0 start-0 vh-100 vw-100 bg-dark bg-opacity-75" style="z-index: 3000;">
-		<div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
+	<div id="spinner-view" class="d-none justify-content-center align-items-center position-absolute top-0 start-0 vh-100 vw-100 bg-dark bg-opacity-75">
+		<div class="spinner-border text-light" role="status">
 			<span class="sr-only"></span>
 		</div>
 	</div>

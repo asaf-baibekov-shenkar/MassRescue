@@ -20,7 +20,7 @@
 						<span class="input-group-text" id="basic-addon1">Force Location:</span>
 						<input type="text" class="form-control" id="InputAddress" name="">
 					</div>
-					<div id="map_form" class="w-100" style="height: 300px"></div>
+					<div id="map_form" class="w-100"></div>
 					<input type="hidden" name="event_id" value="">
 					<input type="hidden" name="force_id" value="">
 					<input type="hidden" name="latitude" value="">

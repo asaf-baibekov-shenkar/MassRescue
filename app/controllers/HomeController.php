@@ -8,7 +8,8 @@ class HomeController extends Controller {
 			header('Location: ' . BASE_URL . 'events');
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			$this->view('home/index', [
-				'js' => JS_PATH . 'home.js'
+				'js' => JS_PATH . 'home.js',
+				'css' => CSS_PATH . 'home.css'
 			]);
 		}
 	}
