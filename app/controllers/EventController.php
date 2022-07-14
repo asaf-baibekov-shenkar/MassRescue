@@ -160,7 +160,8 @@ class EventController extends Controller {
 			$force_id = $_POST['force_id'];
 			Event::findOrFail($event_id);
 			$force = Force::findOrFail($force_id);
-			$force->update(['event_id' => null]);
+			// $force->update(['event_id' => null]);
+			$force->delete();
 			echo '{ "force": '; print_r($force->toJson()); echo ' }';
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			switch ($exception->getModel()) {
