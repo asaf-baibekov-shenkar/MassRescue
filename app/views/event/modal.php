@@ -28,7 +28,7 @@
 				</div>
 				<div class="modal-footer justify-content-evenly">
 					<button type="button" class="col-3 btn btn-danger" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="col-3 btn btn-success" id="add_btn">Add</button>
+					<button type="submit" class="col-3 btn btn-success" id="submit_btn">Add</button>
 				</div>
 			</div>
 		</div>

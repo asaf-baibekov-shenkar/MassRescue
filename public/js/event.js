@@ -144,7 +144,7 @@ function showModal(event_id, force_id, type, forceName, forceDescription, latitu
 		$(`input[name="force_id"]`).val(force_id);
 		$('#InputForceName').val(force_id <= 0 ? "" : forceName);
 		$('#InputDescription').val(force_id <= 0 ? "" : forceDescription);
-		$('#create_btn').html("Submit");
+		$('#submit_btn').html(force_id <= 0 ? "Add" : "Edit");
 		if (typeof google === 'object' && typeof google.maps === 'object') {
 			window.formMapMarkers.forEach(marker => { marker.setMap(null); });
 			if (force_id > 0) {
