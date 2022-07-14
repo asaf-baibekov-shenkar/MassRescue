@@ -109,7 +109,7 @@ $(function() {
 		}
 		const data = formToFormData(document.getElementById('form-create-force'));
 		showSpinner();
-		fetch(window.location.href.split('?')[0] + (index > 0 ? '/updateForce' : '/create'), { method: 'POST', body: data })
+		fetch(window.location.href.split('?')[0] + (index <= 0 ? '/create' : '/updateForce'), { method: 'POST', body: data })
 			.then(() => fetchForces(index > 0 ? crudEnum.update : crudEnum.create))
 			.catch(error => console.log("error: ", error))
 			.finally(() => { hideSpinner() })
@@ -147,8 +147,10 @@ function formToFormData(formElement) {
 }
 
 function showModal(event_id, force_id, type, forceName, forceDescription, latitude, longitude) {
+	$('#event-modal').attr('index', force_id);
 	$('#event-modal').on('show.bs.modal', () => {
-		$('#event-modal-title').html(`Add ${type.charAt(0).toUpperCase() + type.slice(1)}`);
+		let titlePrefix = force_id > 0 ? "Edit" : "Add";
+		$('#event-modal-title').html(`${titlePrefix} ${type.charAt(0).toUpperCase() + type.slice(1)}`);
 		$(`input[name="event_id"]`).val(event_id);
 		$(`input[name="force_id"]`).val(force_id);
 		$(`input[name="type"]`).val(type);
