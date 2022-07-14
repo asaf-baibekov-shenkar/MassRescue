@@ -11,10 +11,11 @@ class EventController extends Controller {
 		try {
 			try {
 				$user = User::where(['session_id' => session_id()])->firstOrFail();
+				$force_cell_role = $user['role'] == "admin" ? 'admin_force_cell.js' : 'force_cell.js';
 				$this->view('event/index', [
 					'css' => CSS_PATH . 'event.css',
 					'js' => JS_PATH . 'event.js',
-					'force-cell-js' => JS_PATH . 'force_cell.js',
+					'force-cell-js' => JS_PATH . $force_cell_role,
 					'consts-js' => JS_PATH . 'consts.js',
 					'spinner-js' => JS_PATH . 'spinner.js',
 					'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',

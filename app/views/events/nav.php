@@ -1,4 +1,3 @@
-<?php $user = json_decode($data['user'], true)["user"]; ?>
 <nav class="navbar navbar-dark bg-dark" style="padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);">
 	<div class="container-fluid">
 		<div class="navbar-brand d-flex align-items-center">

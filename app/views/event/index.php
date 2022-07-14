@@ -1,4 +1,5 @@
 <?php $event = json_decode($data['event'], true)["event"]; ?>
+<?php $user = json_decode($data['user'], true)["user"]; ?>
 <!DOCTYPE html>
 <html lang="en">
 
