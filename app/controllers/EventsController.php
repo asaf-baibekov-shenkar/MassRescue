@@ -5,13 +5,19 @@ class EventsController extends Controller {
 	public function index() {
 		try {
 			$user = User::where(['session_id' => session_id()])->firstOrFail();
+			if ($user['role'] != "admin" && isset($user['force_id'])) {
+				$force = Force::findOrFail($user['force_id']);
+				$eventsList = '[' . Event::findOrFail($force["event_id"])->toJson() . ']';
+			} else {
+				$eventsList = Event::all()->toJson();
+			}
 			$this->view('events/index', [
 				'css' => CSS_PATH . 'events.css',
 				'js' => JS_PATH . 'events.js',
 				'events-cell-js' => JS_PATH . 'event_cell.js',
 				'consts-js' => JS_PATH . 'consts.js',
 				'spinner-js' => JS_PATH . 'spinner.js',
-				'events' => '{ "events": ' . Event::all()->toJson() . ' }',
+				'events' => '{ "events": ' . $eventsList . ' }',
 				'user' => '{ "user": ' . $user->toJson() . ' }'
 			]);
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
