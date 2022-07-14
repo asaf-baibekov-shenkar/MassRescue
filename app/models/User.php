@@ -9,9 +9,11 @@ class User extends Eloquent {
 	public $first_name;
 	public $last_name;
 	public $password;
+	public $role;
 
 	public $timestamps = true;
 	protected $fillable = ['id_number', 'first_name', 'last_name', 'password'];
+	protected $hidden = ['password'];
 }
 
 ?>
