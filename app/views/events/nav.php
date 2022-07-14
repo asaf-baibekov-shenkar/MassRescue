@@ -1,4 +1,4 @@
-<?php $json = json_decode($data['user'], true)["user"]; ?>
+<?php $user = json_decode($data['user'], true)["user"]; ?>
 <nav class="navbar navbar-dark bg-dark" style="padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);">
 	<div class="container-fluid">
 		<div class="navbar-brand d-flex align-items-center">
@@ -9,7 +9,7 @@
 					<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="d-flex align-items-center nav-link text-light mx-3 my-2 p-0" href="./index.html">
-				<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="74" height="74" alt="">
+				<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . $user["profile_image"] ?>" width="74" height="74" alt="">
 			</a>
 			<ol class="breadcrumb mb-0">
 				<li class="breadcrumb-item">Events</li>
@@ -18,9 +18,9 @@
 	</div>
 	<div class="offcanvas offcanvas-start rounded-start bg-dark shadow-lg overflow-hidden" id="offcanvas-main" tabindex="-1" style="border-radius: 2.5rem; width: 350px;">
 		<div class="offcanvas-header flex-column gap-1">
-			<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . 'profile_picture.jpg' ?>" width="120" height="120" alt="">
-			<span class="offcanvas-title text-light fs-3 fw-bolder">Ariella Katzir</span>
-			<span class="text-light fs-5">205374333</span>
+		<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . $user["profile_image"] ?>" width="120" height="120" alt="">
+			<span class="offcanvas-title text-light fs-3 fw-bolder"><?php echo $user["first_name"] . ' ' . $user["last_name"]; ?></span>
+			<span class="text-light fs-5"><?php echo $user["id_number"]; ?></span>
 		</div>
 		<div class="offcanvas-body d-flex flex-column justify-content-between gap-5 p-0">
 			<div class="d-flex flex-column gap-2">
