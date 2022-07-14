@@ -54,11 +54,6 @@ window.initMap = () => {
 };
 
 $(document).on('DOMNodeInserted', '.cell', function () {
-	$(this).click(function() {
-		let index = $(this).attr('index');
-		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
-		return false;
-	});
 
 	$(this).hover(function () {
 		let index = $(this).attr('index');
