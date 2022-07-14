@@ -80,9 +80,11 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 		let formData = new FormData();
 		formData.append('event_id', window.event.event_id);
 		formData.append('force_id', index);
+		showSpinner();
 		fetch(window.location.href.split('?')[0] + '/removeForce', { method: 'POST', body: formData })
 			.then(() => fetchForces(crudEnum.delete))
 			.catch(error => console.log("error: ", error))
+			.finally(() => { hideSpinner() })
 	});
 });
 
@@ -103,13 +105,16 @@ $(function() {
 		}
 		console.log($("#form-create-force").serializeArray());
 		const data = formToFormData(document.getElementById('form-create-force'));
+		showSpinner();
 		fetch(window.location.href.split('?')[0] + (index <= 0 ? '/create' : '/updateForce'), { method: 'POST', body: data })
 			.then(() => fetchForces((index <= 0 ? crudEnum.create : crudEnum.update)))
 			.catch(error => console.log("error: ", error))
+			.finally(() => { hideSpinner() })
 	})
 });
 
 function fetchForces(crud_state) { 
+	showSpinner();
 	return fetch(window.location.href.split('?')[0] + '/forcesList' + '?event_id=' + window.event.event_id)
 		.then(response => response.text())
 		.then(data => {
@@ -117,6 +122,7 @@ function fetchForces(crud_state) {
 			presentForces($('#list'), crud_state, window.event, window.forces, window.map);
 			$('#event-modal').modal('hide');
 		})
+		.finally(() => { hideSpinner() })
 }
 
 function presentForces(list, crud_state, event, forces) {

@@ -49,6 +49,7 @@ window.initMap = () => {
 $(document).on('DOMNodeInserted', '.cell', function () {
 	$(this).click(function() {
 		let index = $(this).attr('index');
+		showSpinner();
 		window.location.replace(window.location.href.slice(0, -1) + '?id=' + index);
 		return false;
 	});
@@ -77,9 +78,11 @@ $(document).on('DOMNodeInserted', '.cell', function () {
 		let index = $(this).parent().parent().attr('index');
 		let formData = new FormData();
 		formData.append('id', index);
+		showSpinner();
 		fetch(window.location.href + '/remove', { method: 'POST', body: formData })
 			.then(() => fetchEvents(crudEnum.delete))
 			.catch(error => console.log("error: ", error))
+			.finally(() => { showSpinner(); })
 	});
 });
 
@@ -121,14 +124,17 @@ $(function() {
 		}
 		console.log($("#form-create-event").serializeArray());
 		const data = formToFormData(document.getElementById('form-create-event'));
+		showSpinner();
 		fetch(window.location.href + (index <= 0 ? '/create' : '/update'), { method: 'POST', body: data })
 			.then(() => fetchEvents((index <= 0 ? crudEnum.create : crudEnum.update)))
 			.catch(error => console.log("error: ", error))
+			.finally(() => { hideSpinner() })
 	})
 
 });
 
 function fetchEvents(crud_state) { 
+	showSpinner();
 	return fetch(window.location.href + '/eventsList')
 		.then(response => response.text())
 		.then(data => {
@@ -136,6 +142,7 @@ function fetchEvents(crud_state) {
 			presentEvents($('#list'), crud_state, window.events, window.map);
 			$('#event-modal').modal('hide');
 		})
+		.finally(() => { hideSpinner(); })
 }
 
 function presentEvents(list, crud_state, events) {

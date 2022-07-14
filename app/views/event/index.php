@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="<?= $data['js'] ?>"></script>
 	<script type="text/javascript" src="<?= $data['force-cell-js'] ?>"></script>
 	<script type="text/javascript" src="<?= $data['consts-js'] ?>"></script>
+	<script type="text/javascript" src="<?= $data['spinner-js'] ?>"></script>
 	<script>
 		window.event = <?php print_r(json_encode(json_decode($data['event'], true)["event"])) ?>;
 		window.forces = <?php print_r(json_encode(json_decode($data['forces'], true)["forces"])) ?>;
@@ -126,6 +127,11 @@
 		</div>
 	</main>
 	<?php include 'modal.php' ?>
+	<div id="spinner-view" class="d-none justify-content-center align-items-center position-absolute top-0 start-0 vh-100 vw-100 bg-dark bg-opacity-75" style="z-index: 3000;">
+		<div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
+			<span class="sr-only"></span>
+		</div>
+	</div>
 </body>
 
 </html>

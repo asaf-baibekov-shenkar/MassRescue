@@ -10,6 +10,7 @@ class EventsController extends Controller {
 				'js' => JS_PATH . 'events.js',
 				'events-cell-js' => JS_PATH . 'event_cell.js',
 				'consts-js' => JS_PATH . 'consts.js',
+				'spinner-js' => JS_PATH . 'spinner.js',
 				'events' => '{ "events": ' . Event::all()->toJson() . ' }',
 				'user' => '{ "user": ' . $user->toJson() . ' }'
 			]);

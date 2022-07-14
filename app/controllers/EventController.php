@@ -16,6 +16,7 @@ class EventController extends Controller {
 					'js' => JS_PATH . 'event.js',
 					'force-cell-js' => JS_PATH . 'force_cell.js',
 					'consts-js' => JS_PATH . 'consts.js',
+					'spinner-js' => JS_PATH . 'spinner.js',
 					'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
 					'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }',
 					'user' => '{ "user": ' . $user->toJson() . ' }'
