@@ -4,8 +4,15 @@ class HomeController extends Controller {
 
 	public function index() {
 		try {
-			$user = User::where(['session_id' => session_id()])->firstOrFail();
-			header('Location: ' . BASE_URL . 'events');
+			if (isset($_SESSION['user_id'])) {
+				$user = User::findOrFail($_SESSION['user_id']);
+				header('Location: ' . BASE_URL . 'events');
+			} else {
+				$this->view('home/index', [
+					'js' => JS_PATH . 'home.js',
+					'css' => CSS_PATH . 'home.css'
+				]);
+			}
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			$this->view('home/index', [
 				'js' => JS_PATH . 'home.js',
