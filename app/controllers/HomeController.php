@@ -74,7 +74,7 @@ class HomeController extends Controller {
 			])->firstOrFail();
 			$user = User::findOrFail($user['user_id']);
 			$user->update(['session_id' => session_id()]);
-			$_SESSION['user_id'] = $user->user_id;
+			$_SESSION['user_id'] = $user['user_id'];
 			header('Location: ' . BASE_URL . 'events');
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			$errors['user'] = "user not found";
