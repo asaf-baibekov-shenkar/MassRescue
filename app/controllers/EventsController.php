@@ -4,10 +4,14 @@ class EventsController extends Controller {
 
 	public function index() {
 		try {
-			$user = User::where(['session_id' => session_id()])->firstOrFail();
-			if ($user['role'] != "admin" && isset($user['force_id'])) {
-				$force = Force::findOrFail($user['force_id']);
-				$eventsList = '[' . Event::findOrFail($force["event_id"])->toJson() . ']';
+			if (isset($_SESSION['user_id'])) {
+				$user = User::findOrFail($_SESSION['user_id']);
+				try {
+					$force = Force::findOrFail($user['force_id']);
+					$eventsList = '[' . Event::findOrFail($force["event_id"])->toJson() . ']';
+				} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+					$eventsList = Event::all()->toJson();
+				}
 			} else {
 				$eventsList = Event::all()->toJson();
 			}
@@ -21,6 +25,7 @@ class EventsController extends Controller {
 				'user' => '{ "user": ' . $user->toJson() . ' }'
 			]);
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			session_destroy();
 			header('Location: ' . BASE_URL);
 		}
 	}
