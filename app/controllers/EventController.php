@@ -10,7 +10,7 @@ class EventController extends Controller {
 		}
 		try {
 			try {
-				$user = User::where(['session_id' => session_id()])->firstOrFail();
+				$user = User::findOrFail($_SESSION['user_id']);
 				$force_cell_role = $user['role'] == "admin" ? 'admin_force_cell.js' : 'force_cell.js';
 				$this->view('event/index', [
 					'css' => CSS_PATH . 'event.css',
@@ -23,6 +23,7 @@ class EventController extends Controller {
 					'user' => '{ "user": ' . $user->toJson() . ' }'
 				]);
 			} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+				session_destroy();
 				header('Location: ' . BASE_URL);
 				return;
 			}
