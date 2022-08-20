@@ -3,30 +3,35 @@
 class EventController extends Controller {
 
 	public function index() {
+		if (!isset($_SESSION['user_id'])) {
+			session_destroy();
+			header('Location: ' . BASE_URL);
+			return;
+		}
 		$id = $_GET['id'];
 		if (!isset($id)) {
 			header('Location: ' . BASE_URL . 'events');
 			return;
 		}
 		try {
-			try {
-				$user = User::findOrFail($_SESSION['user_id']);
-				$force_cell_role = $user['role'] == "admin" ? 'admin_force_cell.js' : 'force_cell.js';
-				$this->view('event/index', [
-					'css' => CSS_PATH . 'event.css',
-					'js' => JS_PATH . 'event.js',
-					'force-cell-js' => JS_PATH . $force_cell_role,
-					'consts-js' => JS_PATH . 'consts.js',
-					'spinner-js' => JS_PATH . 'spinner.js',
-					'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
-					'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }',
-					'user' => '{ "user": ' . $user->toJson() . ' }'
-				]);
-			} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-				session_destroy();
-				header('Location: ' . BASE_URL);
-				return;
-			}
+			$user = User::findOrFail($_SESSION['user_id']);
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+			session_destroy();
+			header('Location: ' . BASE_URL);
+			return;
+		}
+		try {
+			$force_cell_role = $user['role'] == "admin" ? 'admin_force_cell.js' : 'force_cell.js';
+			$this->view('event/index', [
+				'css' => CSS_PATH . 'event.css',
+				'js' => JS_PATH . 'event.js',
+				'force-cell-js' => JS_PATH . $force_cell_role,
+				'consts-js' => JS_PATH . 'consts.js',
+				'spinner-js' => JS_PATH . 'spinner.js',
+				'event' => '{ "event": ' . Event::findOrFail($id)->toJson() . ' }',
+				'forces' => '{ "forces": ' . Force::where('event_id', $id)->get()->toJson() . ' }',
+				'user' => '{ "user": ' . $user->toJson() . ' }'
+			]);	
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 			header('Location: ' . BASE_URL . 'events');
 		}
