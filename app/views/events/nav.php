@@ -7,9 +7,9 @@
 				aria-controls="offcanvas-main" area-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="d-flex align-items-center nav-link text-light mx-3 my-2 p-0" href="./index.html">
+			<div class="d-flex align-items-center nav-link text-light mx-3 my-2 p-0">
 				<img class="bg-white rounded-circle" src="<?php echo IMAGES_PATH . $user["profile_image"] ?>" width="74" height="74" alt="">
-			</a>
+			</div>
 			<ol class="breadcrumb mb-0">
 				<li class="breadcrumb-item">Events</li>
 			</ol>

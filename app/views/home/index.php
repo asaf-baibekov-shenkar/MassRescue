@@ -17,10 +17,10 @@
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<div class="container-fluid">
 			<div class="navbar-brand">
-				<a class="d-flex align-items-center nav-link text-light fs-2" href="./index.html">
+				<div class="d-flex align-items-center nav-link text-light fs-2">
 					<img class="bg-white rounded-circle me-3 py-1" src="./images/logo/logo.svg" width="74" height="74" alt="">
 					<span>Mass Rescue</span>
-				</a>
+				</div>
 			</div>
 			<button
 				class="navbar-toggler" type="button"
