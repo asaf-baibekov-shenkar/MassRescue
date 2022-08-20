@@ -1,4 +1,4 @@
-const BASE_URL = window.location.protocol + "//" + window.location.hostname + "/Final-Submission/public/";
+const BASE_URL = window.location.protocol + "//" + window.location.hostname + "/public/";
 const IMAGES_PATH = BASE_URL + 'images/';
 const ICONS_PATH = IMAGES_PATH + 'icons/';
 

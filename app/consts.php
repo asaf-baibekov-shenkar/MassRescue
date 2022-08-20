@@ -7,7 +7,7 @@ if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
 }
 $uri .= $_SERVER['HTTP_HOST'];
 
-define('BASE_URL', $uri . '/Final-Submission/public/');
+define('BASE_URL', $uri . '/public/');
 define('CSS_PATH', BASE_URL . 'css/');
 define('JS_PATH', BASE_URL . 'js/');
 define('IMAGES_PATH', BASE_URL . 'images/');
