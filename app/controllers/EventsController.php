@@ -3,16 +3,17 @@
 class EventsController extends Controller {
 
 	public function index() {
+		if (!isset($_SESSION['user_id'])) {
+			session_destroy();
+			header('Location: ' . BASE_URL);
+			return;
+		}
 		try {
-			if (isset($_SESSION['user_id'])) {
-				$user = User::findOrFail($_SESSION['user_id']);
-				try {
-					$force = Force::findOrFail($user['force_id']);
-					$eventsList = '[' . Event::findOrFail($force["event_id"])->toJson() . ']';
-				} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-					$eventsList = Event::all()->toJson();
-				}
-			} else {
+			$user = User::findOrFail($_SESSION['user_id']);
+			try {
+				$force = Force::findOrFail($user['force_id']);
+				$eventsList = '[' . Event::findOrFail($force["event_id"])->toJson() . ']';
+			} catch (Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 				$eventsList = Event::all()->toJson();
 			}
 			$this->view('events/index', [
